@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  host: localhost
+  encoding: unicode
+  pool: 5
+  username: kuba
+  password: 
+
+development:
+  <<: *default
+  database: project_manager_development
+
+test:
+  <<: *default
+  database: project_manager_test
+
+production:
+  <<: *default
+  database: project_manager_production
