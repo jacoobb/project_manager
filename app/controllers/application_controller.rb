@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   
   #todo
   # protect_from_forgery with: :exception
-  after_filter :cors_set_access_control_headers
+  before_filter :cors_set_access_control_headers
   
   private
 
