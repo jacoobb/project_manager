@@ -47,6 +47,7 @@ gem 'spring',        group: :development
 
 gem "bcrypt", "~> 3.1.7"
 gem 'therubyracer'
+gem 'thin'
 
 group :test do
   gem "factory_girl_rails", "~> 4.4.0"
