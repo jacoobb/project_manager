@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :student do 
-      resources :session, only: [:create, :destroy, :index]
-    end
+      resources :session, only: [:create, :destroy, :index], via: :options
+    end 
   end
   namespace :admin do
     resources :logs, only: [:index]
