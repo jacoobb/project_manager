@@ -7,7 +7,7 @@ class Api::Student::SessionController < ApiController
   end
 
   def create
-    student = Student.authenticate params_student[:student_id], params_student[:password]
+    student = ::Student.authenticate params_student[:student_id], params_student[:password]
     if student
       session[:student_id] = student.id
       head 201
