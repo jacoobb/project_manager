@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :student do 
-      resources :session, only: [:create, :destroy]
+      resources :session, only: [:create, :destroy, :index]
     end
   end
 

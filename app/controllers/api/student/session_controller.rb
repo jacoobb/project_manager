@@ -1,9 +1,16 @@
 class Api::Student::SessionController < ApiController
+  
+  def index
+    #todo
+    students = ::Student.all
+    render json: students.to_json, status: 201
+  end
+
   def create
     student = Student.authenticate params_student[:student_id], params_student[:password]
     if student
       session[:student_id] = student.id
-      head 200
+      head 201
     else
       head 401
     end
@@ -11,7 +18,7 @@ class Api::Student::SessionController < ApiController
 
   def destroy
     session[:student_id] = nil
-    head 200
+    head 201
   end
 
 

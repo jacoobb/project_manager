@@ -1,7 +1,13 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+unless Student.find_by student_id: '88456'
+  student = Student.new do |s|
+    s.first_name = "Maciek"
+    s.last_name = 'Ogrodniczak'
+    s.password = '12qwaszx'
+    s.password_confirmation = '12qwaszx'
+    s.phone_number = '567567567'
+    s.student_id = '88456'
+    s.pesel = '90081801789'
+    s.email = 'ogor@malutli.com'
+  end
+  puts "Dodano studenta #{student.first_name}." if student.save!
+end

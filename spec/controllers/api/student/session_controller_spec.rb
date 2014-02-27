@@ -7,7 +7,7 @@ describe Api::Student::SessionController do
 
     it 'authenticate success' do
       post :create, student: { student_id: student.student_id, password: '12qwaszx' }
-      response.status.should eq 200
+      response.status.should eq 201
     end
 
     it 'authenticate error' do
@@ -20,7 +20,7 @@ describe Api::Student::SessionController do
   describe '#delete destroy' do
     it 'logout' do
       delete :destroy, id: student.id
-      response.status.should eq 200
+      response.status.should eq 201
     end
   end
 end
