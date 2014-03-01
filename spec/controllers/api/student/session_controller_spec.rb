@@ -10,6 +10,11 @@ describe Api::Student::SessionController do
       response.status.should eq 201
     end
 
+    it 'return matricula_number' do
+      post :create, student: { matricula_number: student.matricula_number, password: '12qwaszx' }
+      JSON.parse(response.body)["matricula_number"].should eq student.matricula_number
+    end
+
     it 'authenticate error' do
       post :create, student: { matricula_number: student.matricula_number, password: 'zxasqw12' }
       response.status.should eq 401

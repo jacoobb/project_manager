@@ -25,7 +25,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
+# gem 'jbuilder', '~> 1.2'
 
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc',          group: :doc, require: false
@@ -48,6 +48,7 @@ gem 'spring',        group: :development
 gem "bcrypt", "~> 3.1.7"
 gem 'therubyracer'
 gem 'thin'
+gem "jbuilder", "~> 2.0.3"
 
 group :test do
   gem "factory_girl_rails", "~> 4.4.0"
