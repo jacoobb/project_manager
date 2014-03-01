@@ -37,7 +37,7 @@ describe Student do
   end
 
   describe 'authenticate' do
-    let(:student) { FactoryGirl.create :student, password: '12qwaszx',password_confirmation: '12qwaszx', student_id: '88468'}
+    let(:student) { FactoryGirl.create :student, password: '12qwaszx',password_confirmation: '12qwaszx', matricula_number: '88468'}
 
     it 'return user' do
       student.reload

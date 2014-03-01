@@ -6,12 +6,12 @@ describe Api::Student::SessionController do
   describe '#post create' do
 
     it 'authenticate success' do
-      post :create, student: { student_id: student.student_id, password: '12qwaszx' }
+      post :create, student: { matricula_number: student.matricula_number, password: '12qwaszx' }
       response.status.should eq 201
     end
 
     it 'authenticate error' do
-      post :create, student: { student_id: student.student_id, password: 'zxasqw12' }
+      post :create, student: { matricula_number: student.matricula_number, password: 'zxasqw12' }
       response.status.should eq 401
     end
 
@@ -19,7 +19,7 @@ describe Api::Student::SessionController do
 
   describe '#delete destroy' do
     it 'logout' do
-      delete :destroy, id: student.id
+      delete :destroy, id: student.matricula_number
       response.status.should eq 201
     end
   end

@@ -5,7 +5,7 @@ one:
   last_name: MyString
   phone_number: MyString
   email: MyString
-  student_id: MyString
+  matricula_number: MyString
   pesel: MyString
   password_hash: MyString
   password_salt: MyString
@@ -15,7 +15,7 @@ two:
   last_name: MyString
   phone_number: MyString
   email: MyString
-  student_id: MyString
+  matricula_number: MyString
   pesel: MyString
   password_hash: MyString
   password_salt: MyString

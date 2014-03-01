@@ -6,7 +6,7 @@ FactoryGirl.define do
     password_confirmation 'tester' 
     phone_number '725678765'
 
-    sequence :student_id do |n|
+    sequence :matricula_number do |n|
       "8845#{n}"
     end
 

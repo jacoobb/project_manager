@@ -7,10 +7,10 @@ class Api::Student::SessionController < ApiController
   end
 
   def create
-    student = ::Student.authenticate params_student[:student_id], params_student[:password]
+    student = ::Student.authenticate params_student[:matricula_number], params_student[:password]
     if student
       session[:student_id] = student.id
-      head 201
+      render json: {matricula_number: student.matricula_number}, status: 201
     else
       head 401
     end
@@ -25,6 +25,6 @@ class Api::Student::SessionController < ApiController
   private
 
     def params_student
-      params.require(:student).permit :student_id, :password
+      params.require(:student).permit :matricula_number, :password
     end
 end
