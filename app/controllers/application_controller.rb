@@ -3,8 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   
   #todo
-  # protect_from_forgery with: :exception
-  before_filter :cors_set_access_control_headers
+  # protect_from_forgery with: :null_session
+  # before_filter :cors_set_access_control_headers
 
   helper_method :current_user
   
