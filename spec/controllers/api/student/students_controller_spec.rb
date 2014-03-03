@@ -1,11 +1,15 @@
 require 'spec_helper'
 
 describe Api::Student::StudentsController do
-  let(:student) { FactoryGirl.create :student, password: '12qwaszx', password_confirmation: '12qwaszx' }
+  let(:student) { FactoryGirl.create :student}
+  before do
+    ApplicationController.any_instance.stub(:current_student).and_return student
+  end
 
   describe '#get show' do
     it 'Not Found' do
-      get :show, id: '0000000', format: :json
+      ApplicationController.any_instance.stub(:current_student).and_return nil
+      get :show, format: :json
       response.status.should eq 404
     end
 

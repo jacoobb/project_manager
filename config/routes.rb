@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :student do 
-      resources :session, only: [:create, :destroy], via: :options
-      resources :students, only: [:show]
+      resources :session, only: [:create, :destroy]
+      resource :students, only: [:show, :create]
     end 
   end
   namespace :admin do
