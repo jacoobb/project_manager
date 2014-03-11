@@ -1,0 +1,30 @@
+<div class="row">
+<form class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4" ng-submit="login(matriculaNumber, password)">
+  <fieldset>
+    <legend>Logowanie</legend>
+
+    <div>
+    	<p class="text-danger">{{message}}</p>
+    </div>
+
+    <div class="form-group">
+      <label class="col-lg-2 control-label">Numer albumu</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" placeholder="Numer albumu" ng-model="matriculaNumber" autofocus>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-lg-2 control-label">Hasło</label>
+      <div class="col-lg-10">
+        <input type="password" class="form-control" placeholder="Hasło" ng-model="password">
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="submit" class="btn btn-primary">Zaloguj</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+</div>
