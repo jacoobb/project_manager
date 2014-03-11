@@ -14,7 +14,7 @@ describe Api::Student::StudentsController do
     end
 
     describe 'return student' do
-      before { get :show, id: student.matricula_number, format: :json }
+      before { get :show, format: :json }
       it { JSON.parse(response.body)["matricula_number"].should eq student.matricula_number }
       it { JSON.parse(response.body)["first_name"].should eq student.first_name }
       it { JSON.parse(response.body)["last_name"].should eq student.last_name }
