@@ -52,10 +52,24 @@ angular.module('app.controllers', [])
 	.controller('ProjectsCtrl', ['$scope', '$location', '$http', function ($scope, $location, $http) {
 		$scope.$root.title = 'Projekty';
 
+		$scope.teacherId = -1;
 		$scope.teachers = [];
+
+		$scope.subjects = [];
+
 		$http.get('/api/student/teachers.json')
 			.then(function(result) {
-				$scope.teachers = result.data; 
+				$scope.teachers = result.data;
+				$scope.teacherId = result.data[0].id;
+
+				$scope.getSubjects();
 		});
+
+		$scope.getSubjects = function() {
+			$http.get('/api/student/teacher/subjects.json?teacher_id=' + $scope.teacherId)
+				.then(function(result) {
+					$scope.subjects = result.data;
+			});
+		};
 
 	}]);
