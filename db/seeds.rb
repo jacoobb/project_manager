@@ -50,3 +50,73 @@ unless Teacher.find_by email: 'jamroz@gmail.com'
   end
   puts "Dodano nauczyciela #{teacher.first_name}." if teacher.save!
 end
+
+unless Subject.count > 0
+  subject = Subject.new do |s|
+    s.name = "Programowanie równoległe i rozproszone"
+    s.subject_type = 'lecture'
+  end
+  puts "Dodano przedmiot #{subject.name}." if subject.save!
+  subject.teachers << Teacher.find_by(email: 'nowak@gmail.com')
+  puts "przypisano#{ Teacher.find_by(email: 'nowak@gmail.com').first_name}  do rzedmiot u#{subject.name}." if subject.save!
+
+  subject = Subject.new do |s|
+    s.name = "Programowanie równoległe i rozproszone"
+    s.subject_type = 'lab'
+  end
+  puts "Dodano przedmiot #{subject.name}." if subject.save!
+  subject.teachers << Teacher.find_by(email: 'nowak@gmail.com')
+  puts "przypisano#{ Teacher.find_by(email: 'nowak@gmail.com').first_name}  do rzedmiot u#{subject.name}." if subject.save!
+
+  subject = Subject.new do |s|
+    s.name = "Programowanie równoległe i rozproszone"
+    s.subject_type = 'project'
+  end
+  puts "Dodano przedmiot #{subject.name}." if subject.save!
+  subject.teachers << Teacher.find_by(email: 'nowak@gmail.com')
+  puts "przypisano#{ Teacher.find_by(email: 'nowak@gmail.com').first_name}  do rzedmiot u#{subject.name}." if subject.save!
+
+  subject = Subject.new do |s|
+    s.name = "Technologie internetowe"
+    s.subject_type = 'lecture'
+  end
+  puts "Dodano przedmiot #{subject.name}." if subject.save!
+  subject.teachers << Teacher.find_by(email: 'jamroz@gmail.com')
+  puts "przypisano #{Teacher.find_by(email: 'jamroz@gmail.com').first_name} do przedmiotu #{subject.name}." if subject.save!
+
+  subject = Subject.new do |s|
+    s.name = "Technologie internetowe"
+    s.subject_type = 'lab'
+  end
+  puts "Dodano przedmiot #{subject.name}." if subject.save!
+  subject.teachers << Teacher.find_by(email: 'jamroz@gmail.com')
+  puts "przypisano #{Teacher.find_by(email: 'jamroz@gmail.com').first_name} do przedmiotu #{subject.name}." if subject.save!
+  
+  subject = Subject.new do |s|
+    s.name = "Zarządzanie projektem informatycznym"
+    s.subject_type = 'lecture'
+  end
+  puts "Dodano przedmiot #{subject.name}." if subject.save!
+  subject.teachers << Teacher.find_by(email: 'zabawa@gmail.com')
+  puts "przypisano #{Teacher.find_by(email: 'zabawa@gmail.com').first_name} do przedmiotu #{subject.name}." if subject.save!
+
+  subject = Subject.new do |s|
+    s.name = "Zarządzanie projektem informatycznym"
+    s.subject_type = 'lab'
+  end
+  puts "Dodano przedmiot #{subject.name}." if subject.save!
+  subject.teachers << Teacher.find_by(email: 'zabawa@gmail.com')
+  puts "przypisano #{Teacher.find_by(email: 'zabawa@gmail.com').first_name} do przedmiotu #{subject.name}." if subject.save!
+end
+
+
+
+
+
+
+
+
+
+
+
+
