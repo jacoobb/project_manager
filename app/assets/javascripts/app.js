@@ -37,7 +37,12 @@ angular.module('app', ['ngRoute', 'app.filters', 'app.services', 'app.directives
 				authenticate: false
 			})
 			.when('/projects', {
-				templateUrl: '../templates/projects.html',
+				templateUrl: '../templates/projects/projects.html',
+				controller: "ProjectsCtrl",
+				authenticate: true
+			})
+			.when('/projects/negotiation', {
+				templateUrl: '../templates/projects/negotiation.html',
 				controller: "ProjectsCtrl",
 				authenticate: true
 			});
@@ -47,9 +52,9 @@ angular.module('app', ['ngRoute', 'app.filters', 'app.services', 'app.directives
 	.run(['$rootScope', '$location', 'SessionService', function ($rootScope, $location, SessionService) {
 		$rootScope.$on("$routeChangeSuccess", function(scope, currentView, previousView) {
 			
-			if(currentView.authenticate == true && SessionService.isAuth == false) {
-				$location.path('/login');
-			}
+			//if(currentView.authenticate == true && SessionService.isAuth == false) {
+			//	$location.path('/login');
+			//}
 		});
 
 		$rootScope.location = $location;

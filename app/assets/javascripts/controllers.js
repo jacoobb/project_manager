@@ -49,10 +49,13 @@ angular.module('app.controllers', [])
 		};
 	}])
 
-	.controller('ProjectsCtrl', ['$scope', '$location', '$window', function ($scope, $location, $window) {
+	.controller('ProjectsCtrl', ['$scope', '$location', '$http', function ($scope, $location, $http) {
 		$scope.$root.title = 'Projekty';
 
-		//$scope.$on('$viewContentLoaded', function () {
-		//	$window.ga('send', 'pageview', {'page': $location.path(), 'title': $scope.$root.title });
-		//});
+		$scope.teachers = [];
+		$http.get('/api/student/teachers.json')
+			.then(function(result) {
+				$scope.teachers = result.data; 
+		});
+
 	}]);
