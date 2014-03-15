@@ -6,9 +6,9 @@ FactoryGirl.define do
     password_confirmation 'tester' 
     phone_number '725678765'
     academic_title 'mgr'
-    
+
     sequence :email do |n|
-      "tester#{n}@tester.com"
+      "tes#{n}@tester.com"
     end
 
   end

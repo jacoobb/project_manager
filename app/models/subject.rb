@@ -1,6 +1,7 @@
 class Subject < ActiveRecord::Base
   SUBJECT_TYPE = %w(lecture lab project)
-
+  
+  has_many :projects
   has_and_belongs_to_many :students
   has_and_belongs_to_many :teachers
   
