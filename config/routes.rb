@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   namespace :api do
 
     namespace :student do 
-      resources :projects, only: [:create]
+      resources :projects, only: [:index, :create]
       resources :teachers, only: [:index]
       resources :subjects, only: [:index]
       resources :session, only: [:create, :destroy]

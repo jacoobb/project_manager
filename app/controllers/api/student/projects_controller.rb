@@ -1,4 +1,7 @@
 class Api::Student::ProjectsController < ApiController
+  def index
+    @projects = current_student.projects
+  end
   
   def create
     project_proposal = ::Student::Project::ProjectProposalCreator.new params_project_proposal, current_student
