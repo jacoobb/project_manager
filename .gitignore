@@ -20,3 +20,4 @@ config/secrets.yml
 config/settings.yml
 
 spec/vcr.log
+.DS_Store
