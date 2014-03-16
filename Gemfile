@@ -46,7 +46,6 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem "bcrypt", "~> 3.1.7"
-#gem 'therubyracer'
 gem 'thin'
 gem "jbuilder", "~> 2.0.3"
 

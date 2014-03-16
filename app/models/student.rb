@@ -1,5 +1,6 @@
 class Student < ActiveRecord::Base
   
+  has_and_belongs_to_many :projects, class_name: '::Project'
   has_and_belongs_to_many :subjects
 
   attr_accessor :password
