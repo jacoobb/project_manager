@@ -72,4 +72,14 @@ angular.module('app.controllers', [])
 			});
 		};
 
+
+		$scope.add = function(teacherId, subjectId, topic, description) {
+			$http.post('/api/student/projects', { project_proposal: { project: { name: topic, description: description, project_type: 'subject' }, teacher_id: teacherId, subject_id: subjectId } })
+      			.success(function (data, status, headers, config) {
+        			alert('ok');
+      			})
+      			.error(function (data, status, headers, config) {
+					alert('dupa');
+      			});
+		};
 	}]);
