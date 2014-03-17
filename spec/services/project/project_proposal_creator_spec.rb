@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe Student::Project::ProjectProposalCreator do
+describe Project::ProjectProposalCreator do
   let(:teacher) { FactoryGirl.create :teacher }
   let(:student) { FactoryGirl.create :student }
 
   it "can be instantiated" do
-    Student::Project::ProjectProposalCreator.new({test: "test"}, student).should 
-      be_an_instance_of Student::Project::ProjectProposalCreator
+    Project::ProjectProposalCreator.new({test: "test"}, student).should 
+      be_an_instance_of Project::ProjectProposalCreator
   end
 
   describe 'create project with subject' do 
@@ -26,19 +26,19 @@ describe Student::Project::ProjectProposalCreator do
       end
 
       it 'create associate with teacher' do
-        project_proposal = ::Student::Project::ProjectProposalCreator.new @project_proposal, student
+        project_proposal = Project::ProjectProposalCreator.new @project_proposal, student
         project_proposal.create
         project_proposal.project.teachers.last.id.should eq teacher.id
       end
           
       it 'create associate with subject' do
-        project_proposal = ::Student::Project::ProjectProposalCreator.new @project_proposal, student
+        project_proposal = Project::ProjectProposalCreator.new @project_proposal, student
         project_proposal.create
         project_proposal.project.subject.id.should eq subject.id
       end
 
       it 'project_type should be subject' do
-        project_proposal = ::Student::Project::ProjectProposalCreator.new @project_proposal, student
+        project_proposal = Project::ProjectProposalCreator.new @project_proposal, student
         project_proposal.create
         project_proposal.project.project_type.should eq "subject"
       end
@@ -56,18 +56,18 @@ describe Student::Project::ProjectProposalCreator do
       end
 
       it 'create return false' do
-        project_proposal = ::Student::Project::ProjectProposalCreator.new @project_proposal, student
+        project_proposal = Project::ProjectProposalCreator.new @project_proposal, student
         project_proposal.create.should be_false
       end
 
       it 'errors not blank' do
-        project_proposal = ::Student::Project::ProjectProposalCreator.new @project_proposal, student
+        project_proposal = Project::ProjectProposalCreator.new @project_proposal, student
         project_proposal.create
         project_proposal.project.errors.blank?.should be_false
       end
 
       it 'teacher errors not empty' do
-        project_proposal = ::Student::Project::ProjectProposalCreator.new @project_proposal, student
+        project_proposal = Project::ProjectProposalCreator.new @project_proposal, student
         project_proposal.create
         project_proposal.project.errors["teacher"].should_not be_empty
       end
@@ -87,7 +87,7 @@ describe Student::Project::ProjectProposalCreator do
     end
 
     it 'project_type should be subject' do
-      project_proposal = ::Student::Project::ProjectProposalCreator.new @project_proposal, student
+      project_proposal = Project::ProjectProposalCreator.new @project_proposal, student
       project_proposal.create
       project_proposal.project.project_type.should eq "first_degree"
     end
@@ -106,7 +106,7 @@ describe Student::Project::ProjectProposalCreator do
     end
 
     it 'project_type should be subject' do
-      project_proposal = ::Student::Project::ProjectProposalCreator.new @project_proposal, student
+      project_proposal = Project::ProjectProposalCreator.new @project_proposal, student
       project_proposal.create
       project_proposal.project.project_type.should eq "second_degree"
     end

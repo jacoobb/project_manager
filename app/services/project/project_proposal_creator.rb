@@ -1,4 +1,4 @@
-class Student::Project::ProjectProposalCreator
+class Project::ProjectProposalCreator
   attr_accessor :project
 
   def initialize arg, student

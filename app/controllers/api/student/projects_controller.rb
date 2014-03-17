@@ -4,7 +4,7 @@ class Api::Student::ProjectsController < ApiController
   end
   
   def create
-    project_proposal = ProjectProposalCreator.new(params_project_proposal, current_student)
+    project_proposal = Project::ProjectProposalCreator.new(params_project_proposal, current_student)
     if project_proposal.create
       message = {id: project_proposal.project.id}
       render json: message.to_json, status: 201
