@@ -49,7 +49,17 @@ angular.module('app.controllers', [])
 		};
 	}])
 
-	.controller('ProjectsCtrl', ['$scope', '$location', '$http', function ($scope, $location, $http) {
+	.controller('MyProjectsCtrl', ['$scope', '$location', '$http', function ($scope, $location, $http) {
+
+		$scope.projects = [];
+
+		$http.get('/api/student/projects.json')
+			.then(function(result) {
+				$scope.projects = result.data;
+		});
+	}])
+
+	.controller('ProjectNegotiationCtrl', ['$scope', '$location', '$http', function ($scope, $location, $http) {
 		$scope.$root.title = 'Projekty';
 
 		$scope.teacherId = -1;
@@ -74,7 +84,7 @@ angular.module('app.controllers', [])
 
 
 		$scope.add = function(teacherId, subjectId, topic, description) {
-			$http.post('/api/student/projects', { project_proposal: { project: { name: topic, description: description, project_type: 'subject' }, teacher_id: teacherId, subject_id: subjectId } })
+			$http.post('/api/student/projects', { project_proposal: { project: { name: topic, description: description, project_type: "subject" }, teacher_id: teacherId, subject_id: subjectId }})
       			.success(function (data, status, headers, config) {
         			alert('ok');
       			})
