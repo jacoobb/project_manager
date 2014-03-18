@@ -2,15 +2,11 @@
 
 angular.module('app.controllers', [])
 
-	.controller('HomeCtrl', ['$scope', '$location', '$window', function ($scope, $location, $window) {
+	.controller('HomeCtrl', ['$scope', '$location', function ($scope, $location) {
 		$scope.$root.title = 'Start';
-
-		//$scope.$on('$viewContentLoaded', function () {
-		//	$window.ga('send', 'pageview', {'page': $location.path(), 'title': $scope.$root.title });
-		//});
 	}])
 
-	.controller('LoginCtrl', ['$scope', '$location', '$window', '$http', 'SessionService', function ($scope, $location, $window, $http, SessionService) {
+	.controller('LoginCtrl', ['$scope', '$location', '$http', 'SessionService', function ($scope, $location, $http, SessionService) {
 		$scope.$root.title = 'Logowanie';
 
 		//$scope.$on('$viewContentLoaded', function () {
@@ -49,6 +45,10 @@ angular.module('app.controllers', [])
 		};
 	}])
 
+	.controller('ProjectsCtrl', ['$scope', '$location', '$http', function ($scope, $location, $http) {
+
+	}])
+
 	.controller('MyProjectsCtrl', ['$scope', '$location', '$http', function ($scope, $location, $http) {
 
 		$scope.projects = [];
@@ -59,7 +59,7 @@ angular.module('app.controllers', [])
 		});
 	}])
 
-	.controller('ProjectNegotiationCtrl', ['$scope', '$location', '$http', function ($scope, $location, $http) {
+	.controller('ProjectNegotiationCtrl', ['$scope', '$location', '$http', '$modal', function ($scope, $location, $http, $modal) {
 		$scope.$root.title = 'Projekty';
 
 		$scope.teacherId = -1;
@@ -86,10 +86,61 @@ angular.module('app.controllers', [])
 		$scope.add = function(teacherId, subjectId, topic, description) {
 			$http.post('/api/student/projects', { project_proposal: { project: { name: topic, description: description, project_type: "subject" }, teacher_id: teacherId, subject_id: subjectId }})
       			.success(function (data, status, headers, config) {
-        			alert('ok');
+      				show('Propozycja tematu została zapisana.', 'Informacja', 'OK', '', 1);
       			})
       			.error(function (data, status, headers, config) {
-					alert('dupa');
+					show('Wystąpił błąd podczas zapisu tematu. Spróbuj ponownie później.', 'Błąd', 'OK', '', 1);
       			});
 		};
+
+		var show = function(m, t, okBtnText, cancelBtnText, numberOfBtns) {
+			var modalInstance = $modal.open({
+				templateUrl: '../templates/modal.html',
+				controller: 'ModalCtrl',
+				resolve: {
+					items: function () {
+						var i = {
+							message: m,
+							title: t,
+							okBtnText: okBtnText,
+							cancelBtnText: cancelBtnText
+						}
+						return i;
+					}	
+				}
+			});
+
+			modalInstance.result.then(function (response) {
+				$location.path('/projects/my_projects');
+			}, function() {	
+			
+			});
+		};
+	}])
+	
+	.controller('DiplomaThesesNegotiationCtrl', ['$scope', '$location', '$http', '$modal', function ($scope, $location, $http, $modal) {
+
+
+	}])
+
+	.controller('ModalCtrl', ['$scope', '$modalInstance', 'items', function ($scope, $modalInstance, items) {
+
+		$scope.message = items.message;
+		$scope.title = items.title;
+
+		$scope.okBtnText = items.okBtnText;
+		$scope.cancelBtnText = items.cancelBtnText;
+
+		$scope.numberOfBtns = items.numberOfBtns;
+
+		$scope.ok = function () {
+			$modalInstance.close();
+		};
+
+		$scope.cancel = function () {
+			$modalInstance.dismiss('cancel');
+		};
+
 	}]);
+
+	

@@ -8,26 +8,26 @@
     </div>
     
     <div class="row">
-                <div class="col-md-4 col-sm-6" ng-repeat="p in projects">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">{{p.name}}</div>
-                        <div class="panel-body">
-                            <p>
-                                Przedmiot: {{p.subject.name}}
-                            </p>
-                            <p>
-                                Prowadzący:
-                                <ul>
-                                    <li ng-repeat="t in p.teachers">
-                                        {{t.academic_title}} {{t.first_name}} {{ t.last_name }}
-                                    </li>
-                                </ul>
-                            </p>
-                            <p>
-                                <a class="btn btn-primary btn-sm" href="#">Przejdź</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>  
+        <div class="col-md-4 col-sm-6" ng-repeat="p in projects">
+            <div class="panel panel-default">
+                <div class="panel-heading">{{p.name}}</div>
+                
+                <div class="panel-body">
+                    <p>
+                        <strong>Przedmiot:</strong> {{p.subject.name}}
+                    </p>
+                    <p>
+                        <strong>Prowadzący:</strong>
+                        <p ng-repeat="t in p.teachers">{{t.academic_title + ' ' + t.first_name + ' ' + t.last_name }}</p>
+                    </p>
+                    <p>
+                        <strong>Status:</strong> 
+                    </p>
+                    <p>
+                        <a class="btn btn-primary btn-sm pull-right" href="#">Przejdź</a>
+                    </p>
+                </div>
+            </div>
+        </div>  
     </div>
 </div>

@@ -1,0 +1,10 @@
+<div class="modal-header">
+  <h3>{{title}}</h3>
+</div>
+<div class="modal-body">
+<p>{{message}}</p>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary btn-sm" ng-click="ok()">{{okBtnText}}</button>
+  <button class="btn btn-warning btn-sm" ng-if="numberOfBtns == 2" ng-click="cancel()">{{cancelBtnText}}</button>
+</div>

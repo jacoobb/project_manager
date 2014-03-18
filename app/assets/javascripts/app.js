@@ -20,7 +20,7 @@ angular.module('app', ['ui.router', 'app.filters', 'app.services', 'app.directiv
 	}])
 */
 
-angular.module('app', ['ngRoute', 'app.filters', 'app.services', 'app.directives', 'app.controllers'])
+angular.module('app', ['ngRoute', 'app.filters', 'app.services', 'app.directives', 'app.controllers', 'ui.bootstrap'])
 
 	.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 		$locationProvider.html5Mode(true);
@@ -49,6 +49,11 @@ angular.module('app', ['ngRoute', 'app.filters', 'app.services', 'app.directives
 			.when('/projects/my_projects', {
 				templateUrl: '../templates/projects/my_projects.html',
 				controller: "MyProjectsCtrl",
+				authenticate: true
+			})
+			.when('/diploma_theses/negotiation', {
+				templateUrl: '../templates/diploma_theses/negotiation.html',
+				controller: "DiplomaThesesNegotiationCtrl",
 				authenticate: true
 			});
 		
