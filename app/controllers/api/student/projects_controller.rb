@@ -1,4 +1,4 @@
-class Api::Student::ProjectsController < ApiController
+class Api::Student::ProjectsController < Api::StudentController
   def index
     @projects = current_student.projects
   end

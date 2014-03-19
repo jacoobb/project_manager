@@ -24,6 +24,7 @@ describe Api::Teacher::SessionController do
 
   describe '#delete destroy' do
     it 'logout' do
+      Api::TeacherController.any_instance.stub(:current_teacher).and_return teacher
       delete :destroy, id: teacher.email
       response.status.should eq 201
     end

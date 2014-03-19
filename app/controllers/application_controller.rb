@@ -5,15 +5,9 @@ class ApplicationController < ActionController::Base
   #todo
   # protect_from_forgery with: :null_session
   # before_filter :cors_set_access_control_headers
-
-  helper_method :current_user
   
 
   private
-
-    def current_student
-      @current_student ||= ::Student.find(session[:student_id]) if session[:student_id]
-    end
 
     def cors_set_access_control_headers
       headers['Access-Control-Allow-Origin'] = '*'

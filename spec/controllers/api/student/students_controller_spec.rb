@@ -3,14 +3,14 @@ require 'spec_helper'
 describe Api::Student::StudentsController do
   let(:student) { FactoryGirl.create :student}
   before do
-    ApplicationController.any_instance.stub(:current_student).and_return student
+    Api::StudentController.any_instance.stub(:current_student).and_return student
   end
 
   describe '#get show' do
     it 'Not Found' do
-      ApplicationController.any_instance.stub(:current_student).and_return nil
+      Api::StudentController.any_instance.stub(:current_student).and_return nil
       get :show, format: :json
-      response.status.should eq 404
+      response.status.should eq 401
     end
 
     describe 'return student' do

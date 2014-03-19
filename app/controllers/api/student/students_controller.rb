@@ -1,7 +1,6 @@
-class Api::Student::StudentsController < ApiController
+class Api::Student::StudentsController < Api::StudentController
   def show
     @student = current_student
-    head 404 unless @student
   end
 
 end

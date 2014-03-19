@@ -1,5 +1,6 @@
-class Api::Teacher::SessionController < ApiController
-  
+class Api::Teacher::SessionController < Api::TeacherController
+  skip_before_action :require_login, only: [:create]
+    
   def create
     teacher = ::Teacher.authenticate params_teacher[:email], params_teacher[:password]
     if teacher

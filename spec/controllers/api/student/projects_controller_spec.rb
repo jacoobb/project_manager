@@ -6,7 +6,7 @@ describe Api::Student::ProjectsController do
 
   let(:student) { FactoryGirl.create :student}
   before do
-    ApplicationController.any_instance.stub(:current_student).and_return student
+    Api::StudentController.any_instance.stub(:current_student).and_return student
   end
 
   describe '#post create' do 
