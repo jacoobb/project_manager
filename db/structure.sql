@@ -36,11 +36,11 @@ CREATE TABLE projects (
     id integer NOT NULL,
     name character varying(255),
     description text,
-    approved boolean,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     project_type character varying(255),
-    subject_id integer
+    subject_id integer,
+    approval_status character varying(255)
 );
 
 
@@ -451,4 +451,8 @@ INSERT INTO schema_migrations (version) VALUES ('20140314115212');
 INSERT INTO schema_migrations (version) VALUES ('20140314115804');
 
 INSERT INTO schema_migrations (version) VALUES ('20140314120112');
+
+INSERT INTO schema_migrations (version) VALUES ('20140317184305');
+
+INSERT INTO schema_migrations (version) VALUES ('20140317184531');
 

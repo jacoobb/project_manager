@@ -8,10 +8,11 @@ class Project::ProjectProposalCreator
 
   def create
     @project = ::Project.new @arg[:project]
-    @project.subject = ::Subject.find @arg[:subject_id] if @arg[:subject_id]
+    @project.subject = Subject.find @arg[:subject_id] if @arg[:subject_id]
+    @project.approval_status = 'expectant'
+
     return false unless valid?
     save
-    @project
   end
 
 
