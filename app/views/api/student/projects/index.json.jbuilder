@@ -3,6 +3,7 @@ json.array! @projects do |project|
   json.name project.name
   json.description project.description
   json.project_type project.project_type
+  json.approval_status project.approval_status
   json.subject do
     json.id project.subject.id
     json.name project.subject.name
@@ -17,7 +18,7 @@ json.array! @projects do |project|
     json.email teacher.email
   end
   json.members project.students do |student|
-    json.matricula_number student.matricula_number
+    json.id student.id
     json.first_name student.first_name
     json.last_name student.last_name
     json.phone_number student.phone_number

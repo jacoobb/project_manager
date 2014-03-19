@@ -37,11 +37,18 @@ describe Project::ProjectProposalCreator do
         project_proposal.project.subject.id.should eq subject.id
       end
 
-      it 'project_type should be subject' do
+      it 'project_type have value subject' do
         project_proposal = Project::ProjectProposalCreator.new @project_proposal, student
         project_proposal.create
         project_proposal.project.project_type.should eq "subject"
       end
+
+      it 'approval_status have value expectant' do
+        project_proposal = Project::ProjectProposalCreator.new @project_proposal, student
+        project_proposal.create
+        project_proposal.project.approval_status.should eq "expectant"
+      end
+
     end
     describe 'faild create' do 
       before do 
