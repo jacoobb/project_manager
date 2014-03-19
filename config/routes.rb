@@ -17,6 +17,8 @@ Rails.application.routes.draw do
       resources :session, only: [:create, :destroy]
       resources :subjects, only: [:index]
     end
+
+    resources :categories, only: [:index]
   end
   
   namespace :admin do
