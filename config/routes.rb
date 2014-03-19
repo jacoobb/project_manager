@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
     namespace :teacher do
       resources :session, only: [:create, :destroy]
+      resources :subjects, only: [:index]
     end
   end
   
