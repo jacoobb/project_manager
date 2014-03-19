@@ -140,6 +140,39 @@ category_names.each do |name|
   puts "Dodano kategorię #{category.name}." if category.save!
 end
 
+technology_names = ["Asembler‎ ",
+ "BASIC‎ ",
+ "C ",
+ "C++‎ ",
+ "Clojure‎ ",
+ "Ezoteryczne języki programowania‎ ",
+ "Fortran‎ ",
+ "Java‎ ",
+ "Języki bazodanowe‎ ",
+ "Języki opisu strony‎ ",
+ "Języki skryptowe‎ ",
+ "Klasyfikacja języków programowania‎ ",
+ "Lisp‎ ",
+ "Meta Language‎ ",
+ "Obiektowe języki programowania‎ ",
+ "Pascal‎ ",
+ "Perl‎ ",
+ "PHP‎ ",
+ "Prolog‎ ",
+ "Python‎ ",
+ "Ruby‎ ",
+ "Smalltalk‎ ",
+ "Tcl‎ "]
+
+technology_names.each do |name|
+  next if Technology.find_by name: name
+  technology = Technology.new do |c|
+    c.name = name
+  end
+  puts "Dodano technologię #{technology.name}." if technology.save!
+end
+
+
 
 
 

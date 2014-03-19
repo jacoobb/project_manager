@@ -185,6 +185,36 @@ ALTER SEQUENCE projects_teachers_id_seq OWNED BY projects_teachers.id;
 
 
 --
+-- Name: projects_technologies; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE projects_technologies (
+    id integer NOT NULL,
+    technology_id integer,
+    project_id integer
+);
+
+
+--
+-- Name: projects_technologies_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE projects_technologies_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: projects_technologies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE projects_technologies_id_seq OWNED BY projects_technologies.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -361,6 +391,37 @@ ALTER SEQUENCE teachers_id_seq OWNED BY teachers.id;
 
 
 --
+-- Name: technologies; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE technologies (
+    id integer NOT NULL,
+    name character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: technologies_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE technologies_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: technologies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE technologies_id_seq OWNED BY technologies.id;
+
+
+--
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -399,6 +460,13 @@ ALTER TABLE ONLY projects_teachers ALTER COLUMN id SET DEFAULT nextval('projects
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY projects_technologies ALTER COLUMN id SET DEFAULT nextval('projects_technologies_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY students ALTER COLUMN id SET DEFAULT nextval('students_id_seq'::regclass);
 
 
@@ -428,6 +496,13 @@ ALTER TABLE ONLY subjects_teachers ALTER COLUMN id SET DEFAULT nextval('subjects
 --
 
 ALTER TABLE ONLY teachers ALTER COLUMN id SET DEFAULT nextval('teachers_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY technologies ALTER COLUMN id SET DEFAULT nextval('technologies_id_seq'::regclass);
 
 
 --
@@ -471,6 +546,14 @@ ALTER TABLE ONLY projects_teachers
 
 
 --
+-- Name: projects_technologies_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY projects_technologies
+    ADD CONSTRAINT projects_technologies_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: students_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -508,6 +591,14 @@ ALTER TABLE ONLY subjects_teachers
 
 ALTER TABLE ONLY teachers
     ADD CONSTRAINT teachers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: technologies_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY technologies
+    ADD CONSTRAINT technologies_pkey PRIMARY KEY (id);
 
 
 --
@@ -550,4 +641,8 @@ INSERT INTO schema_migrations (version) VALUES ('20140317184531');
 INSERT INTO schema_migrations (version) VALUES ('20140319102055');
 
 INSERT INTO schema_migrations (version) VALUES ('20140319102409');
+
+INSERT INTO schema_migrations (version) VALUES ('20140319135752');
+
+INSERT INTO schema_migrations (version) VALUES ('20140319140227');
 

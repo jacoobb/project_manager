@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     end
 
     resources :categories, only: [:index]
+    resources :technologies, only: [:index]
   end
   
   namespace :admin do
