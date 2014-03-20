@@ -9,26 +9,38 @@ angular.module('app.controllers', [])
 	.controller('LoginCtrl', ['$scope', '$location', '$http', 'SessionService', function ($scope, $location, $http, SessionService) {
 		$scope.$root.title = 'Logowanie';
 
-		//$scope.$on('$viewContentLoaded', function () {
-		//	$window.ga('send', 'pageview', {'page': $location.path(), 'title': $scope.$root.title });
-		//});
+		$scope.userType = 'student';
 
 		$scope.message = '';
 
-		$scope.login = function(matriculaNumber, password) {
-			$http.post('/api/student/session', { student: { matricula_number: "88456", password: "12qwaszx" } })
-      			.success(function (data, status, headers, config) {
-        			//$window.sessionStorage.token = data.token;
-        			SessionService.isAuth = true;
-        			SessionService.userName = 'Maciej';
+		$scope.changeClass = function(userType) {
+			$scope.userType = userType;
+		};
 
-        			$location.path('/');
+		$scope.login = function(userName, password) {
+			if($scope.userType == 'student') {
+				$http.post('/api/student/session', { student: { matricula_number: "88456", password: "12qwaszx" } })
+	      			.success(function (data, status, headers, config) {
+	        			SessionService.isAuth = true;
+	        			SessionService.userName = 'Maciej';
 
-      			})
-      			.error(function (data, status, headers, config) {
-        			//delete $window.sessionStorage.token;
-					$scope.message = 'Nieprawidłowy numer albumu lub hasło';
+	        			$location.path('/');
+	      			})
+	      			.error(function (data, status, headers, config) {
+						$scope.message = 'Nieprawidłowy numer albumu lub hasło';
       			});
+	      	} else {
+	      		$http.post('/api/teacher/session', { teacher: { email: "email", password: "12qwaszx" } })
+	      			.success(function (data, status, headers, config) {
+	        			SessionService.isAuth = true;
+	        			SessionService.userName = 'Maciej';
+
+	        			$location.path('/');
+	      			})
+	      			.error(function (data, status, headers, config) {
+						$scope.message = 'Nieprawidłowy email lub hasło';
+      			});
+	      	}
 		};
 
 		$scope.logout = function() {
