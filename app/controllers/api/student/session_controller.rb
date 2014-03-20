@@ -1,4 +1,5 @@
-class Api::Student::SessionController < ApiController
+class Api::Student::SessionController < Api::StudentController
+  skip_before_action :require_login, only: [:create]
   
   def create
     student = ::Student.authenticate params_student[:matricula_number], params_student[:password]

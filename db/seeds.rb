@@ -1,3 +1,4 @@
+#encoding: utf-8
 unless Student.find_by matricula_number: '88456'
   student = Student.new do |s|
     s.first_name = "Maciek"
@@ -109,6 +110,67 @@ unless Subject.count > 0
   puts "przypisano #{Teacher.find_by(email: 'zabawa@gmail.com').first_name} do przedmiotu #{subject.name}." if subject.save!
 end
 
+category_names = ["Sieci neuronowe", "Sztuczna inteligencja",
+"Algorytmy i struktury danych‎",
+"Architektura komputerów‎",
+"Bezpieczeństwo komputerowe‎",
+"Historia informatyki‎",
+"Informatyka kwantowa‎",
+"Informatyka prawnicza‎",
+"Interakcja człowieka z komputerem‎",
+"Języki komputerowe‎",
+"Komputerowe reprezentacje danych‎",
+"Obliczenia równoległe‎",
+"Oprogramowanie‎",
+"Sieci komputerowe‎",
+"Społeczeństwo informacyjne‎",
+"Społeczność informatyczna‎",
+"Sprzęt komputerowy‎",
+"Standardy informatyczne‎",
+"Systemy informatyczne‎",
+"Teoria informacji‎",
+"Teoria obliczeń‎",
+"Zarządzanie technologiami informatycznymi‎",
+"Zastosowania technologii informatycznych‎"]
+category_names.each do |name|
+  next if Category.find_by name: name
+  category = Category.new do |c|
+    c.name = name
+  end
+  puts "Dodano kategorię #{category.name}." if category.save!
+end
+
+technology_names = ["Asembler‎ ",
+ "BASIC‎ ",
+ "C ",
+ "C++‎ ",
+ "Clojure‎ ",
+ "Ezoteryczne języki programowania‎ ",
+ "Fortran‎ ",
+ "Java‎ ",
+ "Języki bazodanowe‎ ",
+ "Języki opisu strony‎ ",
+ "Języki skryptowe‎ ",
+ "Klasyfikacja języków programowania‎ ",
+ "Lisp‎ ",
+ "Meta Language‎ ",
+ "Obiektowe języki programowania‎ ",
+ "Pascal‎ ",
+ "Perl‎ ",
+ "PHP‎ ",
+ "Prolog‎ ",
+ "Python‎ ",
+ "Ruby‎ ",
+ "Smalltalk‎ ",
+ "Tcl‎ "]
+
+technology_names.each do |name|
+  next if Technology.find_by name: name
+  technology = Technology.new do |c|
+    c.name = name
+  end
+  puts "Dodano technologię #{technology.name}." if technology.save!
+end
 
 
 

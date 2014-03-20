@@ -12,6 +12,14 @@ Rails.application.routes.draw do
         resources :subjects, only: [:index]
       end
     end 
+
+    namespace :teacher do
+      resources :session, only: [:create, :destroy]
+      resources :subjects, only: [:index]
+    end
+
+    resources :categories, only: [:index]
+    resources :technologies, only: [:index]
   end
   
   namespace :admin do

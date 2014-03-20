@@ -29,6 +29,67 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: categories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE categories (
+    id integer NOT NULL,
+    name character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: categories_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE categories_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
+
+
+--
+-- Name: categories_projects; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE categories_projects (
+    id integer NOT NULL,
+    category_id integer,
+    project_id integer
+);
+
+
+--
+-- Name: categories_projects_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE categories_projects_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: categories_projects_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE categories_projects_id_seq OWNED BY categories_projects.id;
+
+
+--
 -- Name: projects; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -36,11 +97,11 @@ CREATE TABLE projects (
     id integer NOT NULL,
     name character varying(255),
     description text,
-    approved boolean,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     project_type character varying(255),
-    subject_id integer
+    subject_id integer,
+    approval_status character varying(255)
 );
 
 
@@ -121,6 +182,36 @@ CREATE SEQUENCE projects_teachers_id_seq
 --
 
 ALTER SEQUENCE projects_teachers_id_seq OWNED BY projects_teachers.id;
+
+
+--
+-- Name: projects_technologies; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE projects_technologies (
+    id integer NOT NULL,
+    technology_id integer,
+    project_id integer
+);
+
+
+--
+-- Name: projects_technologies_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE projects_technologies_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: projects_technologies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE projects_technologies_id_seq OWNED BY projects_technologies.id;
 
 
 --
@@ -300,6 +391,51 @@ ALTER SEQUENCE teachers_id_seq OWNED BY teachers.id;
 
 
 --
+-- Name: technologies; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE technologies (
+    id integer NOT NULL,
+    name character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: technologies_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE technologies_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: technologies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE technologies_id_seq OWNED BY technologies.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY categories ALTER COLUMN id SET DEFAULT nextval('categories_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY categories_projects ALTER COLUMN id SET DEFAULT nextval('categories_projects_id_seq'::regclass);
+
+
+--
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -318,6 +454,13 @@ ALTER TABLE ONLY projects_students ALTER COLUMN id SET DEFAULT nextval('projects
 --
 
 ALTER TABLE ONLY projects_teachers ALTER COLUMN id SET DEFAULT nextval('projects_teachers_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY projects_technologies ALTER COLUMN id SET DEFAULT nextval('projects_technologies_id_seq'::regclass);
 
 
 --
@@ -356,6 +499,29 @@ ALTER TABLE ONLY teachers ALTER COLUMN id SET DEFAULT nextval('teachers_id_seq':
 
 
 --
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY technologies ALTER COLUMN id SET DEFAULT nextval('technologies_id_seq'::regclass);
+
+
+--
+-- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY categories
+    ADD CONSTRAINT categories_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: categories_projects_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY categories_projects
+    ADD CONSTRAINT categories_projects_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: projects_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -377,6 +543,14 @@ ALTER TABLE ONLY projects_students
 
 ALTER TABLE ONLY projects_teachers
     ADD CONSTRAINT projects_teachers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: projects_technologies_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY projects_technologies
+    ADD CONSTRAINT projects_technologies_pkey PRIMARY KEY (id);
 
 
 --
@@ -420,6 +594,14 @@ ALTER TABLE ONLY teachers
 
 
 --
+-- Name: technologies_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY technologies
+    ADD CONSTRAINT technologies_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -451,4 +633,16 @@ INSERT INTO schema_migrations (version) VALUES ('20140314115212');
 INSERT INTO schema_migrations (version) VALUES ('20140314115804');
 
 INSERT INTO schema_migrations (version) VALUES ('20140314120112');
+
+INSERT INTO schema_migrations (version) VALUES ('20140317184305');
+
+INSERT INTO schema_migrations (version) VALUES ('20140317184531');
+
+INSERT INTO schema_migrations (version) VALUES ('20140319102055');
+
+INSERT INTO schema_migrations (version) VALUES ('20140319102409');
+
+INSERT INTO schema_migrations (version) VALUES ('20140319135752');
+
+INSERT INTO schema_migrations (version) VALUES ('20140319140227');
 

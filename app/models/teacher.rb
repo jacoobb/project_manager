@@ -13,12 +13,12 @@ class Teacher < ActiveRecord::Base
   
   before_save :encrypt_password
 
-  # class << self
-  #   def authenticate matricula_number, password
-  #     student = find_by(matricula_number: matricula_number)
-  #     return student if student && student.password_hash == BCrypt::Engine.hash_secret(password, student.password_salt) 
-  #   end
-  # end
+  class << self
+    def authenticate email, password
+      teacher = find_by(email: email)
+      return teacher if teacher && teacher.password_hash == BCrypt::Engine.hash_secret(password, teacher.password_salt) 
+    end
+  end
 
 
   private

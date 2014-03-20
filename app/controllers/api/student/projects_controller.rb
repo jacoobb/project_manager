@@ -1,11 +1,11 @@
-class Api::Student::ProjectsController < ApiController
+class Api::Student::ProjectsController < Api::StudentController
   def index
     @projects = current_student.projects
   end
   
   def create
     project_proposal = Project::ProjectProposalCreator.new(params_project_proposal, current_student)
-    if project_proposal.create
+    if project_proposal.create_by_student
       message = {id: project_proposal.project.id}
       render json: message.to_json, status: 201
     else
