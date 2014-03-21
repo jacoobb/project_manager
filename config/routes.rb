@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     namespace :teacher do
       resources :session, only: [:create, :destroy]
       resources :subjects, only: [:index]
+      resources :projects, only: [:index, :create]
     end
 
     resources :categories, only: [:index]

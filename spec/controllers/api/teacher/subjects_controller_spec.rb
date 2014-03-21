@@ -17,7 +17,7 @@ describe Api::Teacher::SubjectsController do
 
     it 'return subjects' do
       Api::TeacherController.any_instance.stub(:current_teacher).and_return teacher
-      get :index, format: :json, teacher_id: teacher.id
+      get :index, format: :json
       JSON.parse(response.body).first["id"].should eq subject.id
     end
   end

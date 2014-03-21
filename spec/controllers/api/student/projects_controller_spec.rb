@@ -75,36 +75,55 @@ describe Api::Student::ProjectsController do
   end
 
   describe '#GET index' do
-    before do
-      post :create, project_proposal:{
-        project:{
-          name: 'Aplikacja na platformę Android',
-          description: 'Praca polega na napisaniu aplikacja na androida',
-          project_type: 'subject'
-        },
-        teacher_id: teacher.id,
-        subject_id: subject.id
-      }
+    describe 'subject project_type' do
+      before do
+        post :create, project_proposal:{
+          project:{
+            name: 'Aplikacja na platformę Android',
+            description: 'Praca polega na napisaniu aplikacja na androida',
+            project_type: 'subject'
+          },
+          teacher_id: teacher.id,
+          subject_id: subject.id
+        }
+      end
+
+      it 'return project' do
+        get :index, format: :json
+        JSON.parse(response.body).first["id"].should eq Project.last.id
+      end
+
+      it 'return subject' do
+        get :index, format: :json
+        JSON.parse(response.body).first["subject"].should_not be_empty
+      end
+
+      it 'return teachers' do
+        get :index, format: :json
+        JSON.parse(response.body).first["teachers"].should_not be_empty
+      end
+
+      it 'return members' do
+        get :index, format: :json
+        JSON.parse(response.body).first["members"].should_not be_empty
+      end
     end
 
-    it 'return project' do
-      get :index, format: :json
-      JSON.parse(response.body).first["id"].should eq Project.last.id
-    end
-
-    it 'return subject' do
-      get :index, format: :json
-      JSON.parse(response.body).first["subject"].should_not be_empty
-    end
-
-    it 'return teachers' do
-      get :index, format: :json
-      JSON.parse(response.body).first["teachers"].should_not be_empty
-    end
-
-    it 'return members' do
-      get :index, format: :json
-      JSON.parse(response.body).first["members"].should_not be_empty
+    describe 'first_degree project_type' do
+      before do
+        post :create, project_proposal:{
+          project:{
+            name: 'Aplikacja na platformę Android',
+            description: 'Praca polega na napisaniu aplikacja na androida',
+            project_type: 'first_degree'
+          },
+          teacher_id: teacher.id
+        }
+      end
+      it 'return project' do
+        get :index, format: :json
+        JSON.parse(response.body).first["id"].should eq Project.last.id
+      end
     end
   end
 end
