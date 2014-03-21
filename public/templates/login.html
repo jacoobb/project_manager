@@ -1,5 +1,5 @@
 <div class="row">
-<form class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4" ng-submit="login(matriculaNumber, password)">
+<form class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4" ng-submit="login(userName, password)">
   <fieldset>
     <legend>Logowanie</legend>
 
@@ -8,11 +8,26 @@
     </div>
 
     <div class="form-group">
+      <ul class="userType">
+        <li ng-class="userType == 'student' ? 'active' : ''" ng-click="changeClass('student')"><a href="#">Student</a></li>
+        <li ng-class="userType == 'teacher' ? 'active' : ''" ng-click="changeClass('teacher')"><a href="#">Wykładowca</a></li>
+      </ul>
+    </div>
+
+    <div class="form-group" ng-show="userType == 'student'">
       <label class="control-label">Numer albumu</label>
       <div>
-        <input type="text" class="form-control" placeholder="Numer albumu" ng-model="matriculaNumber" autofocus>
+        <input type="text" class="form-control" placeholder="Numer albumu" ng-model="userName" autofocus>
       </div>
     </div>
+
+    <div class="form-group" ng-show="userType == 'teacher'">
+      <label class="control-label">Email</label>
+      <div>
+        <input type="text" class="form-control" placeholder="Email" ng-model="userName" autofocus>
+      </div>
+    </div>
+
     <div class="form-group">
       <label class="control-label">Hasło</label>
       <div>
