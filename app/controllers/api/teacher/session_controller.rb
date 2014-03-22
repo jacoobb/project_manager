@@ -5,7 +5,13 @@ class Api::Teacher::SessionController < Api::TeacherController
     teacher = ::Teacher.authenticate params_teacher[:email], params_teacher[:password]
     if teacher
       session[:teacher_id] = teacher.id
-      render json: {email: teacher.id}.to_json, status: 201
+      json = {
+        id: teacher.id,
+        first_name: teacher.first_name,
+        last_name: teacher.last_name,
+        academic_title: teacher.academic_title
+      }.to_json
+      render json: json, status: 201
     else
       head 401
     end

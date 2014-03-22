@@ -10,9 +10,24 @@ describe Api::Teacher::SessionController do
       response.status.should eq 201
     end
 
-    it 'return email' do
+    it 'return id' do
       post :create, teacher: { email: teacher.email, password: '12qwaszx' }
-      JSON.parse(response.body)["email"].should eq teacher.id
+      JSON.parse(response.body)["id"].should eq teacher.id
+    end
+
+    it 'return first_name' do
+      post :create, teacher: { email: teacher.email, password: '12qwaszx' }
+      JSON.parse(response.body)["first_name"].should eq teacher.first_name
+    end
+
+    it 'return last_name' do
+      post :create, teacher: { email: teacher.email, password: '12qwaszx' }
+      JSON.parse(response.body)["last_name"].should eq teacher.last_name
+    end
+
+    it 'return academic_title' do
+      post :create, teacher: { email: teacher.email, password: '12qwaszx' }
+      JSON.parse(response.body)["academic_title"].should eq teacher.academic_title
     end
 
     it 'authenticate error' do
