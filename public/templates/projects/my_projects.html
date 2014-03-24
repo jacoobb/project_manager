@@ -7,27 +7,57 @@
         </div>
     </div>
     
-    <div class="row">
+    <div class="row" ng-show="userType == 'student'">
         <div class="col-md-4 col-sm-6" ng-repeat="p in projects">
             <div class="panel panel-default">
                 <div class="panel-heading">{{p.name}}</div>
                 
                 <div class="panel-body">
                     <p>
-                        <strong>Przedmiot:</strong> {{p.subject.name}}
+                        <strong>Przedmiot:</strong> {{p.subject.name + ' ' + getSubjectTypeText(p.subject.subject_type)}}
                     </p>
                     <p>
                         <strong>Prowadzący:</strong>
                         <p ng-repeat="t in p.teachers">{{t.academic_title + ' ' + t.first_name + ' ' + t.last_name }}</p>
                     </p>
                     <p>
-                        <strong>Status:</strong> 
+                        <strong>Status:</strong>
+                        {{p.approval_status}} 
                     </p>
                     <p>
-                        <a class="btn btn-primary btn-sm pull-right" href="#">Przejdź</a>
+                        <a class="btn btn-default btn-sm pull-right" href="#">Przejdź</a>
                     </p>
                 </div>
             </div>
         </div>  
+    </div>
+
+    <div class="row" ng-show="userType == 'teacher'">
+        <div class="col-md-4 col-sm-6" ng-repeat="p in projects">
+            <div class="panel panel-default">
+                <div class="panel-heading">{{p.name}}</div>
+                
+                <div class="panel-body">
+                    <p>
+                        <strong>Przedmiot:</strong> {{p.subject.name + ' ' + getSubjectTypeText(p.subject.subject_type)}}
+                    </p>
+                    <p>
+                        <strong>Wykonawcy:</strong>
+                        <p ng-repeat="m in p.members">{{m.first_name + ' ' + m.last_name }}</p>
+                    </p>
+                    <p>
+                        <strong>Status:</strong>
+                        {{p.approval_status}} 
+                    </p>
+                    <p>
+                        <a class="btn btn-default btn-sm pull-right" href="#">Przejdź</a>
+                    </p>
+                </div>
+            </div>
+        </div>  
+    </div>
+
+    <div ng-show="userType == 'teacher'" class="row">
+        <a class="btn btn-primary" href="/projects/add_project">Dodaj temat</a>
     </div>
 </div>

@@ -23,6 +23,7 @@ angular.module('app.controllers', [])
 	      			.success(function (data, status, headers, config) {
 	        			SessionService.isAuth = true;
 	        			SessionService.userName = 'Maciej';
+						SessionService.userType = 'student';
 
 	        			$location.path('/');
 	      			})
@@ -30,10 +31,11 @@ angular.module('app.controllers', [])
 						$scope.message = 'Nieprawidłowy numer albumu lub hasło';
       			});
 	      	} else {
-	      		$http.post('/api/teacher/session', { teacher: { email: "email", password: "12qwaszx" } })
+	      		$http.post('/api/teacher/session', { teacher: { email: "zabawa@gmail.com", password: "12qwaszx" } })
 	      			.success(function (data, status, headers, config) {
 	        			SessionService.isAuth = true;
 	        			SessionService.userName = 'Maciej';
+	        			SessionService.userType = 'teacher';
 
 	        			$location.path('/');
 	      			})
@@ -61,17 +63,77 @@ angular.module('app.controllers', [])
 
 	}])
 
-	.controller('MyProjectsCtrl', ['$scope', '$location', '$http', function ($scope, $location, $http) {
+	.controller('AddProjectCtrl', ['$scope', '$location', '$http', 'SubjectService', function ($scope, $location, $http, SubjectService) {
+		$scope.subjects = [];
+		$http.get('/api/teacher/subjects.json')
+			.then(function(result) {
+				$scope.subjects = result.data;
+		});
+
+		$scope.categories = [];
+		$http.get('/api/categories.json')
+			.then(function(result) {
+				$scope.categories = result.data;
+		});
+
+		$scope.technologies = [];
+		$http.get('/api/technologies.json')
+			.then(function(result) {
+				$scope.technologies = result.data;
+		});
+
+		$scope.getSubjectTypeText = function(type) {
+			return SubjectService.getSubjectTypeText(type);
+		};
+
+		$scope.selectedCategories = [];
+		$scope.removeCategory = function(category) {
+			$scope.selectedCategories.splice($scope.selectedCategories.indexOf(category), 1);
+		};
+
+		$scope.addCategory = function(category) {
+			if($scope.selectedCategories.indexOf(category) == -1) {
+				$scope.selectedCategories.push(category);
+			}
+		};
+
+		$scope.selectedTechnologies = [];
+		$scope.removeTechnology = function(technology) {
+			$scope.selectedTechnologies.splice($scope.selectedTechnologies.indexOf(technology), 1);
+		};
+
+		$scope.addTechnology = function(technology) {
+			if($scope.selectedTechnologies.indexOf(technology) == -1) {
+				$scope.selectedTechnologies.push(technology);
+			}
+		};
+	}])
+
+	.controller('MyProjectsCtrl', ['$scope', '$location', '$http', 'SubjectService', 'SessionService', function ($scope, $location, $http, SubjectService, SessionService) {
 
 		$scope.projects = [];
 
-		$http.get('/api/student/projects.json')
-			.then(function(result) {
-				$scope.projects = result.data;
-		});
+		if(SessionService.userType == 'student') {
+			$http.get('/api/student/projects.json')
+				.then(function(result) {
+					$scope.projects = result.data;
+			});
+		} else {
+			$http.get('/api/teacher/projects.json')
+				.then(function(result) {
+					$scope.projects = result.data;
+			});
+		}
+
+		$scope.getSubjectTypeText = function(type) {
+			return SubjectService.getSubjectTypeText(type);
+		};
+
+		$scope.userType = SessionService.userType;
+
 	}])
 
-	.controller('ProjectNegotiationCtrl', ['$scope', '$location', '$http', '$modal', function ($scope, $location, $http, $modal) {
+	.controller('ProjectNegotiationCtrl', ['$scope', '$location', '$http', '$modal', 'SubjectService', function ($scope, $location, $http, $modal, SubjectService) {
 		$scope.$root.title = 'Projekty';
 
 		$scope.teacherId = -1;
@@ -94,6 +156,9 @@ angular.module('app.controllers', [])
 			});
 		};
 
+		$scope.getSubjectTypeText = function(type) {
+			return SubjectService.getSubjectTypeText(type);
+		};
 
 		$scope.add = function(teacherId, subjectId, topic, description) {
 			$http.post('/api/student/projects', { project_proposal: { project: { name: topic, description: description, project_type: "subject" }, teacher_id: teacherId, subject_id: subjectId }})
