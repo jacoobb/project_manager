@@ -195,9 +195,82 @@ angular.module('app.controllers', [])
 		};
 	}])
 	
-	.controller('DiplomaThesesNegotiationCtrl', ['$scope', '$location', '$http', '$modal', function ($scope, $location, $http, $modal) {
+	.controller('DiplomaThesisNegotiationCtrl', ['$scope', '$location', '$http', '$modal', function ($scope, $location, $http, $modal) {
 
 
+	}])
+
+	.controller('AddThesisCtrl', ['$scope', '$location', '$http', 'TeacherService', function ($scope, $location, $http, TeacherService) {
+
+		$scope.categories = [];
+		$http.get('/api/categories.json')
+			.then(function(result) {
+				$scope.categories = result.data;
+		});
+
+		$scope.technologies = [];
+		$http.get('/api/technologies.json')
+			.then(function(result) {
+				$scope.technologies = result.data;
+		});
+
+		$scope.selectedCategories = [];
+		$scope.removeCategory = function(category) {
+			$scope.selectedCategories.splice($scope.selectedCategories.indexOf(category), 1);
+		};
+
+		$scope.addCategory = function(category) {
+			if(category instanceof Object == true) {
+				if($scope.selectedCategories.indexOf(category) == -1) {
+					$scope.selectedCategories.push(category);
+				}
+			}
+		};
+
+		$scope.selectedTechnologies = [];
+		$scope.removeTechnology = function(technology) {
+			$scope.selectedTechnologies.splice($scope.selectedTechnologies.indexOf(technology), 1);
+		};
+
+		$scope.addTechnology = function(technology) {
+			if(technology instanceof Object == true) {
+				if($scope.selectedTechnologies.indexOf(technology) == -1) {
+					$scope.selectedTechnologies.push(technology);
+				}
+			}
+		};
+
+		$scope.add = function(projectType, topic, description) {
+			if(TeacherService.addDiplomaThesis(projectType, topic, description) == true) {
+      			show('Temat pracy dyplomowej został zapisany.', 'Informacja', 'OK', '', 1);
+      		} else {
+				show('Wystąpił błąd podczas zapisu tematu. Spróbuj ponownie później.', 'Błąd', 'OK', '', 1);
+      		}
+		};
+
+		var show = function(m, t, okBtnText, cancelBtnText, numberOfBtns) {
+			var modalInstance = $modal.open({
+				templateUrl: '../templates/modal.html',
+				controller: 'ModalCtrl',
+				resolve: {
+					items: function () {
+						var i = {
+							message: m,
+							title: t,
+							okBtnText: okBtnText,
+							cancelBtnText: cancelBtnText
+						}
+						return i;
+					}	
+				}
+			});
+
+			modalInstance.result.then(function (response) {
+				$location.path('/projects/my_projects');
+			}, function() {	
+			
+			});
+		};
 	}])
 
 	.controller('ModalCtrl', ['$scope', '$modalInstance', 'items', function ($scope, $modalInstance, items) {

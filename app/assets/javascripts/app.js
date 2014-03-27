@@ -56,9 +56,14 @@ angular.module('app', ['ngRoute', 'app.filters', 'app.services', 'app.directives
 				controller: "AddProjectCtrl",
 				authenticate: true
 			})
-			.when('/diploma_theses/negotiation', {
-				templateUrl: '../templates/diploma_theses/negotiation.html',
-				controller: "DiplomaThesesNegotiationCtrl",
+			.when('/diploma_thesis/add_thesis', {
+				templateUrl: '../templates/diploma_thesis/add_thesis.html',
+				controller: "AddThesisCtrl",
+				authenticate: true
+			})
+			.when('/diploma_thesis/negotiation', {
+				templateUrl: '../templates/diploma_thesis/negotiation.html',
+				controller: "DiplomaThesisNegotiationCtrl",
 				authenticate: true
 			});
 		
