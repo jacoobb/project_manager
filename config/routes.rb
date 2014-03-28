@@ -12,6 +12,10 @@ Rails.application.routes.draw do
       namespace :teacher do
         resources :subjects, only: [:index]
       end
+
+      namespace :project do
+        resources :team_members, only: [:create]
+      end
     end 
 
     namespace :teacher do

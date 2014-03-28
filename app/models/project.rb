@@ -25,8 +25,12 @@ class Project < ActiveRecord::Base
     false
   end
 
-  def reserve user
-    students.empty? ? self.students << user : false
+  def reserve student
+    students.empty? ? self.students << student : false
+  end
+
+  def add_students_to_team members
+    members.each {|m| self.students << m}
   end
 
 end

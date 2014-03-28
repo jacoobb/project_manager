@@ -44,7 +44,7 @@ describe Project do
     end 
   end
 
-  describe 'object methods' do
+  describe 'instance methods' do
     let!(:project) { FactoryGirl.create :project }
     describe 'reserved?' do
       it 'return false' do
@@ -68,6 +68,17 @@ describe Project do
       it 'return fasle' do 
         project.reserve student
         project.reserve(FactoryGirl.create :student).should be_false
+      end
+    end
+
+    describe 'add_students_to_team' do
+      let(:student1){ FactoryGirl.create :student }
+      let(:student2){ FactoryGirl.create :student }
+
+      it 'project team have 2 members' do
+        members = [student1, student2]
+        project.add_students_to_team members
+        project.students.count.should eq 2
       end
     end
   end
