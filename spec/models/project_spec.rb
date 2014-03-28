@@ -56,5 +56,19 @@ describe Project do
         project.reserved?.should be_true
       end 
     end
+
+    describe 'reserve' do
+      let(:student){ FactoryGirl.create :student }
+
+      it 'project have student' do
+        project.reserve student
+        project.students.first.should eq student
+      end
+
+      it 'return fasle' do 
+        project.reserve student
+        project.reserve(FactoryGirl.create :student).should be_false
+      end
+    end
   end
 end

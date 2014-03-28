@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
     namespace :student do 
       resources :projects, only: [:index, :create]
+      resources :project_reservations, only: [:create]
       resources :teachers, only: [:index]
       resources :subjects, only: [:index]
       resources :session, only: [:create, :destroy]

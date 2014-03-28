@@ -25,4 +25,8 @@ class Project < ActiveRecord::Base
     false
   end
 
+  def reserve user
+    students.empty? ? self.students << user : false
+  end
+
 end
