@@ -125,7 +125,9 @@ describe Project::ProjectProposalCreator do
   describe 'create by teacher' do 
     let!(:subject) { FactoryGirl.create :subject}
     let!(:category) { FactoryGirl.create :category }
+    let!(:category_2) { FactoryGirl.create :category }
     let!(:technology) { FactoryGirl.create :technology }
+    let!(:technology_2) { FactoryGirl.create :technology }
     describe 'create project with subject' do 
       
       describe 'success create' do 
@@ -136,14 +138,25 @@ describe Project::ProjectProposalCreator do
               description: 'Praca polega na napisaniu aplikacja na androida',
               project_type: 'subject'
             },
-            category_id: category.id,
-            technology_id: technology.id,
+            category_ids: [category.id, category_2.id],
+            technology_ids: [technology.id, technology_2.id],
             subject_id: subject.id
           }
         end
 
+        it 'create associate with categories' do 
+          project_proposal = Project::ProjectProposalCreator.new @project_proposal, teacher
+          project_proposal.create_by_teacher
+          project_proposal.project.categories.count.should eq 2
+        end
+
+        it 'create associate with technologies' do 
+          project_proposal = Project::ProjectProposalCreator.new @project_proposal, teacher
+          project_proposal.create_by_teacher
+          project_proposal.project.technologies.count.should eq 2
+        end
+
         it 'create associate with teacher' do
-          
           project_proposal = Project::ProjectProposalCreator.new @project_proposal, teacher
           project_proposal.create_by_teacher
           project_proposal.project.teachers.last.id.should eq teacher.id
@@ -197,16 +210,16 @@ describe Project::ProjectProposalCreator do
           project_proposal.project.errors["project_type"].should_not be_empty
         end
 
-        it 'category errors not empty' do
+        it 'technology_ids errors not empty' do
           project_proposal = Project::ProjectProposalCreator.new @project_proposal, teacher
           project_proposal.create_by_teacher
-          project_proposal.project.errors["category"].should_not be_empty
+          project_proposal.project.errors["category_ids"].should_not be_empty
         end
 
-        it 'technology errors not empty' do
+        it 'technology_ids errors not empty' do
           project_proposal = Project::ProjectProposalCreator.new @project_proposal, teacher
           project_proposal.create_by_teacher
-          project_proposal.project.errors["technology"].should_not be_empty
+          project_proposal.project.errors["technology_ids"].should_not be_empty
         end
       end
     end
@@ -219,8 +232,8 @@ describe Project::ProjectProposalCreator do
             description: 'Praca polega na napisaniu aplikacja na androida',
             project_type: 'first_degree'
           },
-          category_id: category.id,
-          technology_id: technology.id,
+          category_ids: [category.id, category_2.id],
+          technology_ids: [technology.id, technology_2.id],
           subject_id: subject.id
         }
       end
@@ -240,8 +253,8 @@ describe Project::ProjectProposalCreator do
             description: 'Praca polega na napisaniu aplikacja na androida',
             project_type: 'second_degree'
           },
-          category_id: category.id,
-          technology_id: technology.id,
+          category_ids: [category.id, category_2.id],
+          technology_ids: [technology.id, technology_2.id],
           subject_id: subject.id
         }
       end

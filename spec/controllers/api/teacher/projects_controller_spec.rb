@@ -4,7 +4,9 @@ describe Api::Teacher::ProjectsController do
   let(:teacher) { FactoryGirl.create :teacher}
   let!(:subject) { FactoryGirl.create :subject}
   let!(:category) { FactoryGirl.create :category }
+  let!(:category_2) { FactoryGirl.create :category }
   let!(:technology) { FactoryGirl.create :technology }
+  let!(:technology_2) { FactoryGirl.create :technology }
 
   describe '#post create' do 
 
@@ -15,8 +17,8 @@ describe Api::Teacher::ProjectsController do
           description: 'Praca polega na napisaniu aplikacja na androida',
           project_type: 'subject'
         },
-        category_id: category.id,
-        technology_id: technology.id,
+        category_ids: [category.id, category_2.id],
+        technology_ids: [technology.id, technology_2.id],
         subject_id: subject.id
       }
       response.status.should eq 401
@@ -31,8 +33,8 @@ describe Api::Teacher::ProjectsController do
             description: 'Praca polega na napisaniu aplikacja na androida',
             project_type: 'subject'
           },
-          category_id: category.id,
-          technology_id: technology.id,
+          category_ids: [category.id, category_2.id],
+          technology_ids: [technology.id, technology_2.id],
           subject_id: subject.id
         }
       end
@@ -50,11 +52,11 @@ describe Api::Teacher::ProjectsController do
       end
 
       it 'create associate with technology' do
-        Project.last.technologies.last.id.should eq technology.id
+        Project.last.technologies.count.should eq 2
       end
 
       it 'create associate with category' do
-        Project.last.categories.last.id.should eq category.id
+        Project.last.categories.count.should eq 2
       end
       
       it 'create associate with subject' do
@@ -74,7 +76,7 @@ describe Api::Teacher::ProjectsController do
             description: 'Praca polega na napisaniu aplikacja na androida',
             project_type: 'subject'
           },
-          technology_id: technology.id,
+          technology_ids: [technology.id, technology_2.id],
           subject_id: subject.id
         }
       end
@@ -99,8 +101,8 @@ describe Api::Teacher::ProjectsController do
             description: 'Praca polega na napisaniu aplikacja na androida',
             project_type: 'subject'
           },
-          category_id: category.id,
-          technology_id: technology.id,
+          category_ids: [category.id, category_2.id],
+          technology_ids: [technology.id, technology_2.id],
           subject_id: subject.id
         }
       end
@@ -139,8 +141,8 @@ describe Api::Teacher::ProjectsController do
             description: 'Praca polega na napisaniu aplikacja na androida',
             project_type: 'first_degree'
           },
-          category_id: category.id,
-          technology_id: technology.id
+          category_ids: [category.id, category_2.id],
+          technology_ids: [technology.id, technology_2.id],
         }
       end
 

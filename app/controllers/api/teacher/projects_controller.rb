@@ -16,7 +16,6 @@ class Api::Teacher::ProjectsController < Api::TeacherController
   private
 
     def params_project_proposal
-      params.require(:project_proposal).permit :category_id, :technology_id,
-        :subject_id, project: [:name, :description, :project_type]
+      params.require(:project_proposal).permit :subject_id, project: [:name, :description, :project_type], category_ids: [], technology_ids: []
     end
 end

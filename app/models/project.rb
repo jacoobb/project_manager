@@ -14,4 +14,15 @@ class Project < ActiveRecord::Base
   validates :approval_status, presence: true, inclusion: {in: APPROVAL_STATUS}
   validates :subject, presence: {if: "project_type == 'subject'"}
 
+  class << self
+    def diploma
+      where("project_type = 'first_degree' OR project_type = 'second_degree'")
+    end
+  end
+
+  def reserved?
+    return true if students.count > 0
+    false
+  end
+
 end
