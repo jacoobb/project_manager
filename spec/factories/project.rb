@@ -6,7 +6,12 @@ FactoryGirl.define do
     end
 
     description 'Test'
-    project_type 'first_degree'
-    
+    project_type 'first_degree' 
+    approval_status 'approved'
+  end
+
+  factory :subject_project, parent: :project do
+    project_type 'subject'
+    subject
   end
 end

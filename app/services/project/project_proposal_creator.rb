@@ -13,8 +13,8 @@ class Project::ProjectProposalCreator
     return false unless teacher_project_valid?
     @project.save
     @project.teachers << @author
-    @project.categories << Category.find(@arg[:category_id])
-    @project.technologies << Technology.find(@arg[:technology_id])
+    @arg[:category_ids].each {|id| @project.categories << Category.find(id)}
+    @arg[:technology_ids].each {|id| @project.technologies << Technology.find(id)}
   end
 
   def create_by_student
@@ -36,8 +36,8 @@ class Project::ProjectProposalCreator
 
     def teacher_project_valid?
       @project.valid?
-      @project.errors[:category] = "can't be blank" unless @arg[:category_id]
-      @project.errors[:technology] = "can't be blank" unless @arg[:technology_id]
+      @project.errors[:category_ids] = "can't be blank" unless @arg[:category_ids]
+      @project.errors[:technology_ids] = "can't be blank" unless @arg[:technology_ids]
       return true if @project.errors.blank?
     end
 end
