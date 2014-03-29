@@ -16,7 +16,23 @@ class Project < ActiveRecord::Base
 
   class << self
     def diploma
-      where("project_type = 'first_degree' OR project_type = 'second_degree'")
+      where "project_type = 'first_degree' OR project_type = 'second_degree'"
+    end
+
+    def subject
+      where project_type: 'subject'
+    end
+
+    def first_degree
+      where project_type: 'first_degree'
+    end
+
+    def second_degree
+      where project_type: 'second_degree'
+    end
+
+    def approved
+      where approval_status: 'approved'
     end
   end
 

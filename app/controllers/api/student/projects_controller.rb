@@ -1,10 +1,19 @@
 class Api::Student::ProjectsController < Api::StudentController
   def index
-    @projects = current_student.projects
+    case params[:project_type]
+    when 'subject'
+      @projects = current_student.projects.subject
+    when 'diploma'
+      @projects = current_student.projects.diploma
+    when 'first_degree'
+      @projects = current_student.projects.first_degree
+    when 'second_degree'
+      @projects = current_student.projects.second_degree
+    end
   end
   
   def create
-    project_proposal = Project::ProjectProposalCreator.new(params_project_proposal, current_student)
+    project_proposal = ::Project::ProjectProposalCreator.new(params_project_proposal, current_student)
     if project_proposal.create_by_student
       message = {id: project_proposal.project.id}
       render json: message.to_json, status: 201

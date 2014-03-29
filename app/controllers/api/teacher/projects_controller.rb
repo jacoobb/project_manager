@@ -1,6 +1,15 @@
 class Api::Teacher::ProjectsController < Api::TeacherController
   def index
-    @projects = current_teacher.projects
+    case params[:project_type]
+    when 'subject'
+      @projects = current_teacher.projects.subject
+    when 'diploma'
+      @projects = current_teacher.projects.diploma
+    when 'first_degree'
+      @projects = current_teacher.projects.first_degree
+    when 'second_degree'
+      @projects = current_teacher.projects.second_degree
+    end
   end
 
   def create

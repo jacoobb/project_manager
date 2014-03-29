@@ -14,4 +14,8 @@ FactoryGirl.define do
     project_type 'subject'
     subject
   end
+
+  factory :diploma_project, parent: :project do
+    project_type 'first_degree'
+  end
 end

@@ -24,11 +24,11 @@ describe Project do
   end
 
   describe 'scope' do
+    let!(:subject_project) { FactoryGirl.create :subject_project }
+    let!(:first_degree) { FactoryGirl.create :project, project_type: 'first_degree' }
+    let!(:second_degree) { FactoryGirl.create :project, project_type: 'second_degree' }
+    
     describe 'diploma' do
-      let!(:subject_project) { FactoryGirl.create :subject_project }
-      let!(:first_degree) { FactoryGirl.create :project }
-      let!(:second_degree) { FactoryGirl.create :project }
-      
       it 'return two project' do
         Project.diploma.count.should eq 2
       end
@@ -41,7 +41,40 @@ describe Project do
         Project.diploma.last.id.should eq second_degree.id
       end
 
+      describe 'approved' do
+        let!(:approved_project) { FactoryGirl.create :project, project_type: 'second_degree', approval_status: 'approved' }
+        it 'return approved_project' do
+          Project.approved.last.should eq approved_project
+        end
+      end
     end 
+
+    describe 'subject' do
+      it 'return one project' do 
+        Project.subject.count.should eq 1
+      end
+      it 'return subject_project project' do
+        Project.subject.last.id.should eq subject_project.id
+      end
+    end
+
+    describe 'first_degree' do
+      it 'return one project' do 
+        Project.first_degree.count.should eq 1
+      end
+      it 'return subject_project project' do
+        Project.first_degree.last.id.should eq first_degree.id
+      end
+    end
+
+    describe 'second_degree' do
+      it 'return one project' do 
+        Project.second_degree.count.should eq 1
+      end
+      it 'return subject_project project' do
+        Project.second_degree.last.id.should eq second_degree.id
+      end
+    end
   end
 
   describe 'instance methods' do
