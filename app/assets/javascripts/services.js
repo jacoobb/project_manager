@@ -12,7 +12,7 @@ angular.module('app.services', [])
 		return session;
 	})
 
-	.service('SubjectService', function() {
+	.service('TextService', function() {
 		this.getSubjectTypeText = function(type) {
 			if(type == 'lab') {
 				return 'laboratorium';
@@ -24,16 +24,14 @@ angular.module('app.services', [])
 
 			return 'ćwiczenia';
 		};
-	})
 
-	.service('TeacherService', function() {
-		this.addDiplomaThesis = function(projectType, topic, description, categories, technologies) {
-			$http.post('/api/teacher/projects', { project_proposal: { project: { name: topic, description: description, project_type: projectType }, teacher_id: teacherId, subject_id: subjectId }})
-    			.success(function (data, status, headers, config) {
-      				return true;
-      			})
-      			.error(function (data, status, headers, config) {
-					return false;
-      		});
-		}
+		this.getProjectTypeText = function(type) {
+			if(type == 'first_degree') {
+				return 'Pierwszy stopień';
+			} else if(type == 'second_degree') {
+				return 'Drugi stopień';
+			}
+
+			return 'Projekt';
+		};
 	});

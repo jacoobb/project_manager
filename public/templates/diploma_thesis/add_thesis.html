@@ -15,7 +15,7 @@
 			      	<div class="col-lg-10">
 				    	<div class="radio">
 				    		<label>
-				    			<input ng-model="projectType" type="radio" name="radioGroup" value="first_degree" checked="checked">
+				    			<input ng-model="projectType" type="radio" name="radioGroup" value="first_degree">
 				    			I stopień
 				    		</label>
 				    	</div>
@@ -32,7 +32,7 @@
 				<div class="form-group">
 					<label class="col-lg-2 control-label">Kategoria</label>
 			      	<div class="col-lg-10">
-						<input type="text" class="form-control" ng-model="selectedCategory" typeahead="category as category.name for category in categories | filter:{name:$viewValue}">
+						<input type="text" class="form-control" ng-model="selectedCategory" typeahead="category as category.name for category in categories | filter:{name:$viewValue}" checked="checked">
 
 						<button type="button" class="btn btn-sm btn-default" ng-click="addCategory(selectedCategory)" ng-disabled="!(selectedCategory)" disabled>Dodaj</button>
 					</div>

@@ -1,25 +1,5 @@
 'use strict';
 
-/*
-angular.module('app', ['ui.router', 'app.filters', 'app.services', 'app.directives', 'app.controllers'])
-
-	.config(['$stateProvider', '$locationProvider', function ($stateProvider, $locationProvider) {
-		$stateProvider
-			.state('home', {
-				url: '/',
-				templateUrl: '../templates/home.html',
-				controller: 'HomeCtrl'
-			})
-			.state('login', {
-				url: '/login',
-				templateUrl: '../templates/login.html',
-				controller: 'LoginCtrl'
-			});
-			
-		$locationProvider.html5Mode(true);
-	}])
-*/
-
 angular.module('app', ['ngRoute', 'app.filters', 'app.services', 'app.directives', 'app.controllers', 'ui.bootstrap'])
 
 	.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
@@ -54,6 +34,11 @@ angular.module('app', ['ngRoute', 'app.filters', 'app.services', 'app.directives
 			.when('/projects/add_project', {
 				templateUrl: '../templates/projects/add_project.html',
 				controller: "AddProjectCtrl",
+				authenticate: true
+			})
+			.when('/diploma_thesis/my_thesis', {
+				templateUrl: '../templates/diploma_thesis/my_thesis.html',
+				controller: "MyThesisCtrl",
 				authenticate: true
 			})
 			.when('/diploma_thesis/add_thesis', {

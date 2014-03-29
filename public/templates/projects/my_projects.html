@@ -22,7 +22,11 @@
                     </p>
                     <p>
                         <strong>Status:</strong>
-                        {{p.approval_status}} 
+                        <span class="label label-success" ng-if="p.approval_status == 'approved'">Zatwierdzony</span>
+                        <span class="label label-default" ng-if="p.approval_status == 'expectant'">Czeka na akceptację</span> 
+                        <span class="label label-danger" ng-if="p.approval_status == 'rejected'">Odrzucony</span>
+                        <span class="label label-warning" ng-if="p.approval_status == 'to_improve'">Do poprawy</span> 
+                        <span class="label label-info" ng-if="p.approval_status == 'finished'">Zakończony</span> 
                     </p>
                     <p>
                         <a class="btn btn-default btn-sm pull-right" href="#">Przejdź</a>
@@ -47,7 +51,11 @@
                     </p>
                     <p>
                         <strong>Status:</strong>
-                        {{p.approval_status}} 
+                        <span class="label label-success" ng-if="p.approval_status == 'approved'">Zatwierdzony</span>
+                        <span class="label label-default" ng-if="p.approval_status == 'expectant'">Czeka na akceptację</span> 
+                        <span class="label label-danger" ng-if="p.approval_status == 'rejected'">Odrzucony</span>
+                        <span class="label label-warning" ng-if="p.approval_status == 'to_improve'">Do poprawy</span> 
+                        <span class="label label-info" ng-if="p.approval_status == 'finished'">Zakończony</span>
                     </p>
                     <p>
                         <a class="btn btn-default btn-sm pull-right" href="#">Przejdź</a>

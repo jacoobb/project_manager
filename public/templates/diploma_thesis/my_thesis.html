@@ -1,0 +1,71 @@
+<div class="bs-docs-section">
+	<div class="page-header">
+    	<div class="row">
+            <div class="col-lg-12">
+              <h2>Moje prace dyplomowe</h2>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row" ng-show="userType == 'teacher'">
+        <div class="col-md-4 col-sm-6" ng-repeat="d in diplomaThesis">
+            <div class="panel panel-default">
+                <div class="panel-heading">{{d.name}}</div>
+                
+                <div class="panel-body">
+                    <p>
+                        <strong>Stopień:</strong> {{getProjectTypeText(d.project_type)}}
+                    </p>
+                    <p>
+                        <strong>Status:</strong> 
+                        <span class="label label-success" ng-if="d.approval_status == 'approved'">Zatwierdzony</span>
+                        <span class="label label-default" ng-if="d.approval_status == 'expectant'">Czeka na akceptację</span> 
+                        <span class="label label-danger" ng-if="d.approval_status == 'rejected'">Odrzucony</span>
+                        <span class="label label-warning" ng-if="d.approval_status == 'to_improve'">Do poprawy</span> 
+                        <span class="label label-info" ng-if="d.approval_status == 'finished'">Zakończony</span> 
+                    </p>
+                    <p>
+                        <strong>Wykonawca:</strong> 
+                        <p ng-if="d.members.length != 0">{{d.members[0].first_name + ' ' + d.members[0].last_name }}</p>
+                    </p>
+                    <p>
+                        <a class="btn btn-default btn-sm pull-right" href="#">Przejdź</a>
+                    </p>
+                </div>
+            </div>
+        </div>  
+    </div>
+
+    <div class="row" ng-show="userType == 'student'">
+        <div class="col-md-4 col-sm-6" ng-repeat="d in diplomaThesis">
+            <div class="panel panel-default">
+                <div class="panel-heading">{{d.name}}</div>
+                
+                <div class="panel-body">
+                    <p>
+                        <strong>Stopień:</strong> {{d.project_type}}
+                    </p>
+                    <p>
+                        <strong>Status:</strong>
+                        <span class="label label-success" ng-if="d.approval_status == 'approved'">Zatwierdzony</span>
+                        <span class="label label-default" ng-if="d.approval_status == 'expectant'">Czeka na akceptację</span> 
+                        <span class="label label-danger" ng-if="d.approval_status == 'rejected'">Odrzucony</span>
+                        <span class="label label-warning" ng-if="d.approval_status == 'to_improve'">Do poprawy</span> 
+                        <span class="label label-info" ng-if="d.approval_status == 'finished'">Zakończony</span> 
+                    </p>
+                    <p>
+                        <strong>Promotor:</strong> 
+                        <p ng-if="d.teachers.length != 0">{{d.teachers[0].academic_title + ' ' + d.teachers[0].first_name + ' ' + d.teachers[0].last_name }}</p>
+                    </p>
+                    <p>
+                        <a class="btn btn-default btn-sm pull-right" href="#">Przejdź</a>
+                    </p>
+                </div>
+            </div>
+        </div>  
+    </div>
+
+    <div ng-show="userType == 'teacher'" class="row">
+        <a class="btn btn-primary" href="/projects/add_project">Dodaj temat</a>
+    </div>
+</div>
