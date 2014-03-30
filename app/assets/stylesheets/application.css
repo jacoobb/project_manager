@@ -50,3 +50,11 @@
   color: #999999;
   cursor: default;
 }
+
+.label-category {
+  background-color: #9900cc;
+}
+
+.label-technology {
+  background-color: #006633;
+}
