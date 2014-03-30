@@ -15,6 +15,7 @@ class Api::Teacher::ProjectsController < Api::TeacherController
   def create
     project_proposal = Project::ProjectProposalCreator.new(params_project_proposal, current_teacher)
     if project_proposal.create_by_teacher
+      MyLogger.new.project_activity_log project_proposal.project, current_teacher, 'create_project_proposal'
       message = {id: project_proposal.project.id}
       render json: message.to_json, status: 201
     else

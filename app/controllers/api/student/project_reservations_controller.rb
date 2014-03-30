@@ -2,7 +2,12 @@ class Api::Student::ProjectReservationsController < Api::StudentController
   def create
     project = Project.find_by id: params_project_reservation[:id]
     if project
-      project.reserve(current_student) ? head(201) : head(406)
+      if project.reserve(current_student)
+        MyLogger.new.project_activity_log project, current_student, 'reserve_project'
+        head(201) 
+      else
+        head(406)
+      end
     else
       head 404
     end

@@ -3,6 +3,7 @@ class Project < ActiveRecord::Base
   APPROVAL_STATUS = %w(expectant approved rejected to_improve finished)
 
   belongs_to :subject
+  has_many :activity_logs
   has_and_belongs_to_many :teachers
   has_and_belongs_to_many :students
   has_and_belongs_to_many :categories

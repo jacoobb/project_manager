@@ -1,5 +1,6 @@
 class Teacher < ActiveRecord::Base
   
+  has_many :activity_logs
   has_and_belongs_to_many :subjects
   has_and_belongs_to_many :projects
 
