@@ -3,6 +3,7 @@ class Api::Student::Project::TeamMembersController < Api::Student::ProjectContro
     members = find_members 
     if members
       current_project.add_students_to_team members
+      MyLogger.new.project_activity_log current_project, current_student, 'add_student_to_team'
       head 201
     else
       head 406
