@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers').controller('MyThesisCtrl', ['$scope', '$location', '$http', 'TextService', 'SessionService', function ($scope, $location, $http, TextService, SessionService) {
+angular.module('app.controllers').controller('MyThesisCtrl', ['$scope', '$location', '$http', '$modal', 'TextService', 'SessionService', function ($scope, $location, $http, $modal, TextService, SessionService) {
 
 	$scope.diplomaThesis = [];
 
