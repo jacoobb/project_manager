@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  PROJECT_TYPE = %w(subject first_degree second_degree)
+  PROJECT_TYPE = %w(subject first_degree second_degree diploma)
   APPROVAL_STATUS = %w(expectant approved rejected to_improve finished)
 
   belongs_to :subject
