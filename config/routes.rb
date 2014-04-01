@@ -34,6 +34,8 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :logs, only: [:index]
   end
+
+  get "/*all", to: 'static_pages#index', constraints: { :all => /.*/ }
   root 'static_pages#index'
 
 end
