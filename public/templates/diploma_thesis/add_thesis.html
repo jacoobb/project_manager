@@ -9,20 +9,20 @@
 
     <div class="row">
         <div class="col-md-6">
-			<form class="form-horizontal" ng-submit="add(projectType, topic, description)">
+			<form class="form-horizontal" ng-submit="add(topic, description)">
 				<div class="form-group">
 					<label class="col-lg-2 control-label">Stopień</label>
 			      	<div class="col-lg-10">
-				    	<div class="radio">
+				    	<div class="checkbox">
 				    		<label>
-				    			<input ng-model="projectType" type="radio" name="radioGroup" value="first_degree">
+				    			<input type="checkbox" ng-model="firstDegree" ng-change="change()">
 				    			I stopień
 				    		</label>
 				    	</div>
 
-				    	<div class="radio">
+				    	<div class="checkbox">
 				    		<label>
-				    			<input ng-model="projectType" type="radio" name="radioGroup" value="second_degree">
+				    			<input type="checkbox" ng-model="secondDegree" ng-change="change()">
 				    			II stopień
 				    		</label>
 				    	</div>

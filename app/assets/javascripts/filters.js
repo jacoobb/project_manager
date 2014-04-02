@@ -8,6 +8,24 @@ angular.module('app.filters', [])
 		}
 	}])
 
+	.filter('topicFilter', [function () {
+		return function (projects, topic) {
+			if(!angular.isUndefined(projects) && !angular.isUndefined(topic)) {
+				var temp = [];
+
+				angular.forEach(projects, function(p) {
+					if(p.name.indexOf(topic) != -1) {
+						temp.push(p);
+					}	
+				});
+
+				return temp;
+			} else {
+				return projects;
+			}
+		};
+	}])
+
 	.filter('teacherFilter', [function () {
 		return function (projects, name) {
 			if(!angular.isUndefined(projects) && !angular.isUndefined(name)) {
@@ -32,13 +50,35 @@ angular.module('app.filters', [])
 
 	.filter('categoryFilter', [function () {
 		return function (projects, categoryName) {
-			if(!angular.isUndefined(projects) && !angular.isUndefined(categoryName)) {
+			if(!angular.isUndefined(projects) && !angular.isUndefined(categoryName) && categoryName != 'Brak') {
 				var temp = [];
 
 				angular.forEach(projects, function(p) {
 					if(p.categories.length != 0) {
 						angular.forEach(p.categories, function (c) {
-							if(c.name.indexOf(categoryName) != -1) {
+							if(c.name == categoryName) {
+								temp.push(p);
+							}
+						});
+					}
+				});
+
+				return temp;
+			} else {
+				return projects;
+			}
+		};
+	}])
+
+	.filter('technologyFilter', [function () {
+		return function (projects, technologyName) {
+			if(!angular.isUndefined(projects) && !angular.isUndefined(technologyName) && technologyName != 'Brak') {
+				var temp = [];
+
+				angular.forEach(projects, function(p) {
+					if(p.technologies.length != 0) {
+						angular.forEach(p.technologies, function (t) {
+							if(t.name == technologyName) {
 								temp.push(p);
 							}
 						});
