@@ -135,5 +135,21 @@ describe Api::Student::ProjectsController do
       end
     end
   end
+
+  describe '#GET show' do
+    let(:project) { FactoryGirl.create :project }
+    before do 
+      student.projects << project 
+      get :show, format: :json, id: project.id
+    end
+
+    it '200' do
+      response.status.should eq 200
+    end
+
+    it 'return project' do
+      JSON.parse(response.body)["id"].should eq project.id
+    end
+  end
 end
 
