@@ -124,6 +124,100 @@ ALTER SEQUENCE categories_projects_id_seq OWNED BY categories_projects.id;
 
 
 --
+-- Name: chats; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE chats (
+    id integer NOT NULL,
+    message text,
+    student_id integer,
+    teacher_id integer,
+    project_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: chats_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE chats_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: chats_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE chats_id_seq OWNED BY chats.id;
+
+
+--
+-- Name: chats_students; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE chats_students (
+    id integer NOT NULL,
+    chat_id integer,
+    student_id integer
+);
+
+
+--
+-- Name: chats_students_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE chats_students_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: chats_students_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE chats_students_id_seq OWNED BY chats_students.id;
+
+
+--
+-- Name: chats_teachers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE chats_teachers (
+    id integer NOT NULL,
+    chat_id integer,
+    teacher_id integer
+);
+
+
+--
+-- Name: chats_teachers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE chats_teachers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: chats_teachers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE chats_teachers_id_seq OWNED BY chats_teachers.id;
+
+
+--
 -- Name: projects; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -480,6 +574,27 @@ ALTER TABLE ONLY categories_projects ALTER COLUMN id SET DEFAULT nextval('catego
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY chats ALTER COLUMN id SET DEFAULT nextval('chats_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY chats_students ALTER COLUMN id SET DEFAULT nextval('chats_students_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY chats_teachers ALTER COLUMN id SET DEFAULT nextval('chats_teachers_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY projects ALTER COLUMN id SET DEFAULT nextval('projects_id_seq'::regclass);
 
 
@@ -568,6 +683,30 @@ ALTER TABLE ONLY categories
 
 ALTER TABLE ONLY categories_projects
     ADD CONSTRAINT categories_projects_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: chats_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY chats
+    ADD CONSTRAINT chats_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: chats_students_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY chats_students
+    ADD CONSTRAINT chats_students_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: chats_teachers_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY chats_teachers
+    ADD CONSTRAINT chats_teachers_pkey PRIMARY KEY (id);
 
 
 --
@@ -696,4 +835,10 @@ INSERT INTO schema_migrations (version) VALUES ('20140319135752');
 INSERT INTO schema_migrations (version) VALUES ('20140319140227');
 
 INSERT INTO schema_migrations (version) VALUES ('20140329142645');
+
+INSERT INTO schema_migrations (version) VALUES ('20140402092223');
+
+INSERT INTO schema_migrations (version) VALUES ('20140402093712');
+
+INSERT INTO schema_migrations (version) VALUES ('20140402093758');
 

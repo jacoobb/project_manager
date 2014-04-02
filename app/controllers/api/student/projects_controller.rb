@@ -11,6 +11,10 @@ class Api::Student::ProjectsController < Api::StudentController
       @projects = current_student.projects.second_degree
     end
   end
+
+  def show
+    @project = current_student.projects.find_by id: params[:id]
+  end
   
   def create
     project_proposal = ::Project::ProjectProposalCreator.new(params_project_proposal, current_student)

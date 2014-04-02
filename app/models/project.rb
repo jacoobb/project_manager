@@ -4,6 +4,7 @@ class Project < ActiveRecord::Base
 
   belongs_to :subject
   has_many :activity_logs
+  has_many :chats
   has_and_belongs_to_many :teachers
   has_and_belongs_to_many :students
   has_and_belongs_to_many :categories
@@ -17,7 +18,7 @@ class Project < ActiveRecord::Base
 
   class << self
     def diploma
-      where "project_type = 'first_degree' OR project_type = 'second_degree'"
+      where "project_type = 'first_degree' OR project_type = 'second_degree' OR project_type = 'diploma'"
     end
 
     def subject
