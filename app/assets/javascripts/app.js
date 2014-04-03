@@ -21,6 +21,11 @@ angular.module('app', ['ngRoute', 'app.filters', 'app.services', 'app.directives
 				controller: "ProjectsCtrl",
 				authenticate: true
 			})
+			.when('/project/:id', {
+				templateUrl: '../templates/projects/project.html',
+				controller: "ProjectCtrl",
+				authenticate: true
+			})
 			.when('/projects/negotiation', {
 				templateUrl: '../templates/projects/negotiation.html',
 				controller: "ProjectNegotiationCtrl",

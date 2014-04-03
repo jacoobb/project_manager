@@ -34,4 +34,12 @@ angular.module('app.services', [])
 
 			return 'Projekt';
 		};
+
+		this.getActivityTypeText = function(type) {
+			if(type == 'change_status') {
+				return 'Zmiana statusu projektu';
+			} else if(type == 'reserve_project') {
+				return 'Rezerwacja projektu';
+			}
+		};
 	});

@@ -1,0 +1,40 @@
+<div class="bs-docs-section">
+	<div class="page-header">
+    	<div class="row">
+            <div class="col-lg-12">
+              <h2>Projekt</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+    	<div class="col-lg-12">
+    		<ul class="list-unstyled">
+    			<li>
+    				<strong>Temat:</strong> {{project.name}}
+    			</li>
+				<li>
+            		<strong>Prowadzący:</strong>
+                	<span ng-repeat="t in project.teachers">
+                		{{t.academic_title + ' ' + t.first_name + ' ' + t.last_name + ' '}}
+                	</span>
+            	</li>
+            	<li>
+            		<strong>Wykonawca:</strong>
+                	<span ng-repeat="m in project.members">
+                		{{m.first_name + ' ' + m.last_name }}
+                	</span>
+                	<button class="btn btn-primary btn-xs">Dodaj</button>
+                </li>
+                <li>
+                	<div class="col-lg-4">
+                		<input type="text" class="form-control">
+                	</div>
+                	<div class="col-lg-2">
+                	  	<button class="btn btn-defaut btn-xs">+</button>
+                	</div>
+                </li>
+            </ul>
+    	</div>
+    </div>
+</div>

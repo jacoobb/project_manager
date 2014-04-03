@@ -2,10 +2,6 @@
 
 angular.module('app.controllers', [])
 
-	.controller('HomeCtrl', ['$scope', '$location', function ($scope, $location) {
-		$scope.$root.title = 'Start';
-	}])
-
 	.controller('LoginCtrl', ['$scope', '$location', '$http', 'SessionService', function ($scope, $location, $http, SessionService) {
 		$scope.$root.title = 'Logowanie';
 
