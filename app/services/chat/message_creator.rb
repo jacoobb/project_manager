@@ -11,7 +11,7 @@ class Chat::MessageCreator
     return unless @chat.valid?
     @chat.save
     @chat.teachers << @chat.sender
-    add_recipient
+    add_recipients
   end
 
   def create_by_student
@@ -19,13 +19,25 @@ class Chat::MessageCreator
     return false unless @chat.valid?
     @chat.save
     @chat.students << @chat.sender
-    add_recipient
+    add_recipients
   end
   
   private 
-    def add_recipient
-      @args[:teacher_recipient_ids].each {|id| @chat.teachers << Teacher.find_by(id: id)}
-      @args[:student_recipient_ids].each {|id| @chat.students << Student.find_by(id: id)}
+    def add_recipients
+      add_teacher_recipients if @args[:teacher_recipient_ids]
+      add_student_recipients if @args[:student_recipient_ids]
+    end
+
+    def add_teacher_recipients
+      @args[:teacher_recipient_ids].each do |id|
+        @chat.teachers << Teacher.find_by(id: id) unless @chat.teachers.find_by(id: id)
+      end
+    end
+
+    def add_student_recipients
+      @args[:student_recipient_ids].each do |id| 
+        @chat.students << Student.find_by(id: id) unless @chat.students.find_by(id: id)
+      end
     end
 
 end

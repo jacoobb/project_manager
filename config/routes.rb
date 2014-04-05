@@ -25,6 +25,10 @@ Rails.application.routes.draw do
       resources :session, only: [:create, :destroy]
       resources :subjects, only: [:index]
       resources :projects, only: [:index, :create, :show]
+      
+      namespace :project do
+        resources :chats, only: [:create, :index]
+      end
     end
 
     resources :students, only: [:index]

@@ -24,4 +24,9 @@ class Chat < ActiveRecord::Base
   def sender
     student ? student : teacher
   end
+
+  def sender_type
+    return 'student' if student
+    return 'teacher' if teacher
+  end
 end

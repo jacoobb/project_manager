@@ -16,7 +16,7 @@ describe Chat::MessageCreator do
       atr = {
         message: 'zacznamy!!',
         student_recipient_ids: [student.id, student2.id],
-        teacher_recipient_ids: []
+        teacher_recipient_ids: [teacher.id]
       }
       Chat::MessageCreator.new(teacher, project, atr).create_by_teacher
     end
@@ -48,7 +48,7 @@ describe Chat::MessageCreator do
     before do 
       atr = {
         message: 'nie damy rady!!',
-        student_recipient_ids: [student2.id],
+        student_recipient_ids: [student2.id, student.id],
         teacher_recipient_ids: [teacher.id]
       }
       Chat::MessageCreator.new(student, project, atr).create_by_student
