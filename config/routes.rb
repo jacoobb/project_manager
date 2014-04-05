@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
     namespace :student do 
       resources :activity_logs, only: [:index]
-      resources :projects, only: [:index, :create, :show]
+      resources :projects, only: [:index, :create, :show, :update]
       resources :project_reservations, only: [:create]
       resources :teachers, only: [:index]
       resources :subjects, only: [:index]
@@ -24,7 +24,7 @@ Rails.application.routes.draw do
       resources :activity_logs, only: [:index]
       resources :session, only: [:create, :destroy]
       resources :subjects, only: [:index]
-      resources :projects, only: [:index, :create, :show]
+      resources :projects, only: [:index, :create, :show, :update]
       
       namespace :project do
         resources :chats, only: [:create, :index]

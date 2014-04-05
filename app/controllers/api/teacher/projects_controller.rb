@@ -16,6 +16,16 @@ class Api::Teacher::ProjectsController < Api::TeacherController
     @project = current_teacher.projects.find_by id: params[:id]
   end
 
+  def update
+    project = current_teacher.projects.find params[:id]
+    project.approval_status = 'approved'
+    if project.update params_project_proposal[:project]
+      head 201
+    else
+      head 400
+    end
+  end
+
   def create
     project_proposal = Project::ProjectProposalCreator.new(params_project_proposal, current_teacher)
     if project_proposal.create_by_teacher

@@ -15,6 +15,16 @@ class Api::Student::ProjectsController < Api::StudentController
   def show
     @project = current_student.projects.find_by id: params[:id]
   end
+
+  def update
+    project = current_student.projects.find params[:id]
+    project.approval_status = 'expectant'
+    if project.update params_project_proposal[:project]
+      head 201
+    else
+      head 400
+    end
+  end
   
   def create
     project_proposal = ::Project::ProjectProposalCreator.new(params_project_proposal, current_student)

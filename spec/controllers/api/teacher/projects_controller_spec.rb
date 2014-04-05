@@ -178,4 +178,63 @@ describe Api::Teacher::ProjectsController do
       JSON.parse(response.body)["id"].should eq project.id
     end
   end
+
+  describe 'PUT update' do
+    describe 'success' do
+      let(:project) { FactoryGirl.create :project, approval_status: 'to_improve' }
+      before do 
+        Api::TeacherController.any_instance.stub(:current_teacher).and_return teacher
+        teacher.projects << project 
+        put :update, {
+          id: project.id,
+          project_proposal:{
+            project:{
+              name: 'Aplikacja na platformę Android poprawa tematu',
+              description: 'Praca polega na napisaniu aplikacja na androida toprawa opisu'
+            }
+          }
+        }
+      end
+
+      it '201' do
+        response.status.should eq 201
+      end
+
+      it 'update name' do
+        project.reload
+        project.name.should eq 'Aplikacja na platformę Android poprawa tematu'
+      end
+
+      it 'update description' do
+        project.reload
+        project.description.should eq 'Praca polega na napisaniu aplikacja na androida toprawa opisu'
+      end
+
+      it 'update approval_status' do
+        project.reload
+        project.approval_status.should eq 'approved'
+      end
+    end
+
+    describe 'error' do
+      let(:project) { FactoryGirl.create :project, approval_status: 'to_improve' }
+      before do 
+        Api::TeacherController.any_instance.stub(:current_teacher).and_return teacher
+        teacher.projects << project 
+        put :update, {
+          id: project.id,
+          project_proposal:{
+            project:{
+              name: '',
+              description: 'Praca polega na napisaniu aplikacja na androida toprawa opisu'
+            }
+          }
+        }
+      end
+
+      it '400' do
+        response.status.should eq 400
+      end
+    end
+  end
 end
