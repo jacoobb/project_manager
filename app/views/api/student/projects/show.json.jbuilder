@@ -31,3 +31,11 @@ end
 json.technologies @project.technologies do |technology|
   json.name technology.name 
 end
+json.comments_to_topic @project.comments.to_topic do |comment|
+  json.text comment.text
+  json.create_time comment.created_at
+end
+json.comments_to_description @project.comments.to_description do |comment|
+  json.text comment.text
+  json.create_time comment.created_at
+end

@@ -166,6 +166,7 @@ describe Api::Teacher::ProjectsController do
     before {Api::TeacherController.any_instance.stub(:current_teacher).and_return teacher}
     let(:project) { FactoryGirl.create :project }
     before do 
+      FactoryGirl.create :comment, project: project
       teacher.projects << project 
       get :show, format: :json, id: project.id
     end
