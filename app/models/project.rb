@@ -5,6 +5,7 @@ class Project < ActiveRecord::Base
   belongs_to :subject
   has_many :activity_logs
   has_many :chats
+  has_many :comments
   has_and_belongs_to_many :teachers
   has_and_belongs_to_many :students
   has_and_belongs_to_many :categories

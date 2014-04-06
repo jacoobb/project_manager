@@ -218,6 +218,39 @@ ALTER SEQUENCE chats_teachers_id_seq OWNED BY chats_teachers.id;
 
 
 --
+-- Name: comments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE comments (
+    id integer NOT NULL,
+    comment_type character varying(255),
+    text text,
+    project_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE comments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
+
+
+--
 -- Name: projects; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -595,6 +628,13 @@ ALTER TABLE ONLY chats_teachers ALTER COLUMN id SET DEFAULT nextval('chats_teach
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY projects ALTER COLUMN id SET DEFAULT nextval('projects_id_seq'::regclass);
 
 
@@ -707,6 +747,14 @@ ALTER TABLE ONLY chats_students
 
 ALTER TABLE ONLY chats_teachers
     ADD CONSTRAINT chats_teachers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
 
 
 --
@@ -841,4 +889,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140402092223');
 INSERT INTO schema_migrations (version) VALUES ('20140402093712');
 
 INSERT INTO schema_migrations (version) VALUES ('20140402093758');
+
+INSERT INTO schema_migrations (version) VALUES ('20140405132724');
 

@@ -20,6 +20,7 @@ class Api::Student::ProjectsController < Api::StudentController
     project = current_student.projects.find params[:id]
     project.approval_status = 'expectant'
     if project.update params_project_proposal[:project]
+      MyLogger.new.project_activity_log project, current_student, 'update_project_proposal'
       head 201
     else
       head 400

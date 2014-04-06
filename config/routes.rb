@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       
       namespace :project do
         resources :chats, only: [:create, :index]
+        resources :comments, only: [:create]
       end
     end
 
