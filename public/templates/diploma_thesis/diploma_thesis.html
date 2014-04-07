@@ -15,29 +15,35 @@
 				    <div class="form-group">
 				      <label class="col-lg-2 control-label">Promotor</label>
 				      <div class="col-lg-10">
-				        <input type="text" class="form-control" ng-model="searchText"/>
+				        <input type="text" class="form-control" ng-model="teacherSearch"/>
 				      </div>
 				    </div>
 
 				    <div class="form-group">
 				      <label class="col-lg-2 control-label">Temat</label>
 				      <div class="col-lg-10">
-				        <input type="text" class="form-control" ng-model="searchText2"/>
+				        <input type="text" class="form-control" ng-model="topicSearch"/>
 				      </div>
 				    </div>
 			    </div>
 			    
 			    <div class="col-lg-6">
 				    <div class="form-group">
-				      <label class="col-lg-2 control-label">Kategoria</label>
+				    <label class="col-lg-2 control-label">Kategoria</label>
 				      <div class="col-lg-10">
-				        <input type="text" class="form-control"/>
+				      <select class="form-control" ng-model="categorySearch">
+				      	  <option value="Brak">---</option>
+				          <option ng-repeat="c in categories" value="{{c.name}}">{{c.name}}</option>
+				      </select>
 				      </div>
 				    </div>
 				    <div class="form-group">
 				      <label for="inputPassword" class="col-lg-2 control-label">Technologia</label>
 				      <div class="col-lg-10">
-				        <input type="text" class="form-control"/>
+				        <select class="form-control" ng-model="technologySearch">
+				      	  <option value="Brak">---</option>
+				          <option ng-repeat="t in technologies" value="{{t.name}}">{{t.name}}</option>
+				      	</select>
 				      </div>
 				    </div>
 			    </div>
@@ -52,40 +58,40 @@
         			<tr>
         				<th>#</th>
         				<th>Tytuł</th>
-        				<th>Szczegóły</th>
+        				<th>Kategoria</th>
+        				<th>Technologia</th>
+        				<th>Promotor</th>
         				<th>Wykonawca</th>
         			</tr>
         		</thead>
         		<tbody>
-        			<tr ng-repeat="d in filtered = (diplomaThesis | teacherFilter:searchText | categoryFilter:searchText2)" ng-class="d.reserved == false ? 'active' : ''">
+        			<tr ng-repeat="d in filtered = (diplomaThesis | teacherFilter:teacherSearch | categoryFilter:categorySearch | technologyFilter:technologySearch | topicFilter:topicSearch)" ng-class="d.reserved == false ? 'active' : ''">
         				<td>{{$index + 1}}</td>
         				<td>
-        					<p>
+        					<div>
         						<strong>{{d.name}}</strong>
-        					</p>
-        					<p collapse="isCollapsed[$index]">
-        						<strong>Opis:</strong> {{d.description}}
-        					</p>
-        					<p>
+        					</div>
+        					<div collapse="isCollapsed[$index]">
+        						<p>
+        							<strong>Stopień studiów:</strong> {{getProjectTypeText(d.project_type)}}
+        						</p>
+        						<p>
+        							<strong>Opis:</strong> {{d.description}}
+        						</p>
+        					</div>
+        					<div>
         						<a href="#" ng-click="isCollapsed[$index] = !isCollapsed[$index]" ng-show="isCollapsed[$index] == true">Rozwiń</a>
         						<a href="#" ng-click="isCollapsed[$index] = !isCollapsed[$index]" ng-show="isCollapsed[$index] == false">Zwiń</a>
-        					</p>
+        					</div>
         				</td>
         				<td>
-        				    <p>
-        						<strong>Promotor:</strong> {{d.teachers[0].academic_title + ' ' + d.teachers[0].first_name + ' ' + d.teachers[0].last_name }}
-        					</p>
-        					<p>
-        						<strong>Stopień studiów:</strong> {{getProjectTypeText(d.project_type)}}
-        					</p>
-        					<p>
-        						<strong>Kategoria:</strong>
-        						<span class="label label-category" ng-repeat="c in d.categories">{{c.name}}</span>
-        					</p>
-        					<p>
-        						<strong>Technologia:</strong>
-        						<span class="label label-technology" ng-repeat="t in d.technologies">{{t.name}}</span>
-        					</p>
+        					<span class="label label-category" ng-repeat="c in d.categories">{{c.name}}</span>
+        				</td>
+        				<td>
+							<span class="label label-technology" ng-repeat="t in d.technologies">{{t.name}}</span>
+        				</td>
+        				<td>
+							{{d.teachers[0].academic_title + ' ' + d.teachers[0].first_name + ' ' + d.teachers[0].last_name }}
         				</td>
         				<td ng-show="d.members.length > 0">{{d.members[0].first_name + ' ' + d.members[0].last_name}}</td>
         				<td ng-show="d.members.length == 0">

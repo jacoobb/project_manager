@@ -1,6 +1,18 @@
 'use strict';
 
 angular.module('app.controllers').controller('DiplomaThesisCtrl', ['$scope', '$location', '$http', '$modal', 'TextService', 'SessionService', function ($scope, $location, $http, $modal, TextService, SessionService) {
+	$scope.categorySearch = 'Brak';
+	$scope.categories = [];
+	$http.get('/api/categories.json').then(function(result) {
+		$scope.categories = result.data;
+	});
+
+	$scope.technologySearch = 'Brak';
+	$scope.technologies = [];
+	$http.get('/api/technologies.json').then(function(result) {
+		$scope.technologies = result.data;
+	});
+
 	$scope.isCollapsed = [];
 
 	$scope.diplomaThesis = [];

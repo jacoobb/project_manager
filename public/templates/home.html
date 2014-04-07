@@ -8,9 +8,36 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6">
-        	Historia konta i szybka nawigacja
-    	</div>
-    </div>
+        <div class="col-lg-6">
+            <h4>Ostatnie wydarzenia</h4>
+
+            <ul class="list-group">
+                <li class="list-group-item" style="border: 0px; font-size:14px;" ng-repeat="l in activityLogs">
+                    <span class="label label-reserve-project">{{getActivityTypeText(l.name)}}</span>
+                    przez <strong>{{l.author.first_name + ' ' + l.author.last_name}}</strong>
+                    <span class="badge">{{l.created_at | date:'yyyy-MM-dd'}}</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-lg-2">
+
+        </div>
+
+        <div class="col-lg-4">
+            <h4>Szybka nawigacja</h4>
+            <div class="well well-lg">
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="/diploma_thesis/my_thesis">Moje prace dyplomowe</a>
+                    </li>
+                    <li>
+                        <a href="/projects/my_projects">Moje prace projekty</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>  
 </div>
 

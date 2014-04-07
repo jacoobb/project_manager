@@ -1,7 +1,15 @@
 'use strict';
 
 angular.module('app.controllers').controller('AddThesisCtrl', ['$scope', '$location', '$http', '$modal', function ($scope, $location, $http, $modal) {
-	$scope.projectType = "first_degree";
+	$scope.firstDegree = true;
+	$scope.secondDegree = true;
+
+	$scope.change = function() {
+		if($scope.firstDegree == false && $scope.secondDegree == false) {
+			$scope.firstDegree = true;
+			$scope.secondDegree = true;
+		}
+	};
 
 	$scope.categories = [];
 	$http.get('/api/categories.json').then(function(result) {
@@ -39,7 +47,7 @@ angular.module('app.controllers').controller('AddThesisCtrl', ['$scope', '$locat
 		}
 	};
 
-	$scope.add = function(projectType, topic, description) {
+	$scope.add = function(topic, description) {
 		var categoryIds = new Array();
 		$scope.selectedCategories.forEach(function(element) {
 			categoryIds.push(element.id);
@@ -49,6 +57,14 @@ angular.module('app.controllers').controller('AddThesisCtrl', ['$scope', '$locat
 		$scope.selectedTechnologies.forEach(function(element) {
 			technologyIds.push(element.id);
 		});
+
+		var projectType = 'first_degree';
+		if($scope.firstDegree == true && $scope.secondDegree == true) {
+			projectType = 'diploma';
+		} else if($scope.secondDegree == true) {
+			project_type = 'second_degree';
+		}
+
 
 		$http.post('/api/teacher/projects', { project_proposal: { project: { name: topic, description: description, project_type: projectType }, category_ids: categoryIds, technology_ids: technologyIds }})
    			.success(function (data, status, headers, config) {
