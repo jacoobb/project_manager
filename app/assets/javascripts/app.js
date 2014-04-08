@@ -41,6 +41,11 @@ angular.module('app', ['ngRoute', 'app.filters', 'app.services', 'app.directives
 				controller: "AddProjectCtrl",
 				authenticate: true
 			})
+			.when('/projects/my_projects/edit', {
+				templateUrl: '../templates/projects/edit_project.html',
+				controller: "EditProjectCtrl",
+				authenticate: true
+			})
 			.when('/diploma_thesis', {
 				templateUrl: '../templates/diploma_thesis/diploma_thesis.html',
 				controller: "DiplomaThesisCtrl",

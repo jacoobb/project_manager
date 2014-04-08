@@ -1,0 +1,35 @@
+<div class="bs-docs-section">
+	<div class="page-header">
+    	<div class="row">
+            <div class="col-lg-12">
+              <h2>Edytuj temat projektu</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+			<form class="form-horizontal" ng-submit="save(topic, description)">
+			    <div class="form-group">
+			      <label class="col-lg-2 control-label">Temat</label>
+			      <div class="col-lg-10">
+			        <input type="text" class="form-control" ng-model="topic" placeholder="Temat" required>
+			      </div>
+			    </div>
+			    <div class="form-group">
+			      <label class="col-lg-2 control-label">Opis</label>
+			      <div class="col-lg-10">
+			        <textarea class="form-control" ng-model="description" rows="5" placeholder="Opis" required></textarea>
+			      </div>
+			    </div>
+			    
+			    <div class="form-group">
+			      <div class="col-lg-10 col-lg-offset-2">
+			        <button type="submit" class="btn btn-primary">Zapisz</button>
+			      </div>
+			    </div>
+			</form>
+    	</div>
+    </div>
+</div>
+
