@@ -29,7 +29,7 @@
                         <span class="label label-info" ng-if="p.approval_status == 'finished'">Zakończony</span> 
                     </p>
                     <p>
-                        <a class="btn btn-default btn-sm pull-right" ng-href="/project/{{p.id}}">Przejdź</a>
+                        <a class="btn btn-default btn-sm pull-right" ng-href="/project_details/{{p.id}}">Przejdź</a>
                     </p>
                 </div>
             </div>
@@ -58,8 +58,8 @@
                         <span class="label label-info" ng-if="p.approval_status == 'finished'">Zakończony</span>
                     </p>
                     <p>
-                        <a class="btn btn-default btn-sm pull-right" ng-href="/projects/my_projects/edit/{{p.id}}" ng-show="p.members.length == 0">Edytuj</a>
-                        <a class="btn btn-default btn-sm pull-right" ng-href="/project/{{p.id}}" ng-show="p.members.length > 0">Przejdź</a>
+                        <a class="btn btn-default btn-sm pull-right" ng-href="/project_edit/{{p.id}}" ng-show="p.members.length == 0">Edytuj</a>
+                        <a class="btn btn-default btn-sm pull-right" ng-href="/project_details/{{p.id}}" ng-show="p.members.length > 0">Przejdź</a>
                     </p>
                 </div>
             </div>

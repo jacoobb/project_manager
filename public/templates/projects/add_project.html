@@ -14,7 +14,7 @@
 					<label class="col-lg-2 control-label">Przedmiot</label>
 			      	<div class="col-lg-10">
 				        <select class="form-control" ng-model="subjectId">
-				          <option ng-repeat="s in subjects" value="{{s.id}}">{{s.name + ' ' + getSubjectTypeText(s.subject_type)}}</option>
+				          <option ng-repeat="s in subjects" value="{{s.id}}">{{s.name + ' - ' + getSubjectTypeText(s.subject_type)}}</option>
 				        </select>
 					</div>
 				</div>

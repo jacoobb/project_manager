@@ -21,9 +21,14 @@ angular.module('app', ['ngRoute', 'app.filters', 'app.services', 'app.directives
 				controller: "ProjectsCtrl",
 				authenticate: true
 			})
-			.when('/project/:id', {
+			.when('/project_details/:id', {
 				templateUrl: '../templates/projects/project.html',
 				controller: "ProjectCtrl",
+				authenticate: true
+			})
+			.when('/project_edit/:id', {
+				templateUrl: '../templates/projects/edit_project.html',
+				controller: "EditProjectCtrl",
 				authenticate: true
 			})
 			.when('/projects/negotiation', {
@@ -39,11 +44,6 @@ angular.module('app', ['ngRoute', 'app.filters', 'app.services', 'app.directives
 			.when('/projects/add_project', {
 				templateUrl: '../templates/projects/add_project.html',
 				controller: "AddProjectCtrl",
-				authenticate: true
-			})
-			.when('/projects/my_projects/edit', {
-				templateUrl: '../templates/projects/edit_project.html',
-				controller: "EditProjectCtrl",
 				authenticate: true
 			})
 			.when('/diploma_thesis', {

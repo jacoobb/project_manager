@@ -40,6 +40,10 @@ angular.module('app.services', [])
 				return 'Zmiana statusu projektu';
 			} else if(type == 'reserve_project') {
 				return 'Rezerwacja projektu';
+			} else if(type == 'add_student_to_team') {
+				return 'Dodanie członka zespołu do projektu';
+			} else if(type == 'create_project_proposal') {
+				return 'Zgłoszenie propozycji tematu';
 			}
 		};
 	});

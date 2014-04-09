@@ -8,20 +8,19 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-8">
             <h4>Ostatnie wydarzenia</h4>
 
             <ul class="list-group">
                 <li class="list-group-item" style="border: 0px; font-size:14px;" ng-repeat="l in activityLogs">
                     <span class="label label-reserve-project">{{getActivityTypeText(l.name)}}</span>
                     przez <strong>{{l.author.first_name + ' ' + l.author.last_name}}</strong>
+
                     <span class="badge">{{l.created_at | date:'yyyy-MM-dd'}}</span>
+
+                    -> <a ng-href="/project_details/{{l.project.id}}" class="pull right"><strong>Przejdź</strong></a>
                 </li>
             </ul>
-        </div>
-
-        <div class="col-lg-2">
-
         </div>
 
         <div class="col-lg-4">

@@ -15,7 +15,7 @@ angular.module('app.controllers', [])
 
 		$scope.login = function(userName, password) {
 			if($scope.userType == 'student') {
-				$http.post('/api/student/session', { student: { matricula_number: "88456", password: "12qwaszx" } })
+				$http.post('/api/student/session', { student: { matricula_number: "88457", password: "12qwaszx" } })
 	      			.success(function (data, status, headers, config) {
 	        			SessionService.isAuth = true;
 	        			SessionService.userName = 'Maciej';

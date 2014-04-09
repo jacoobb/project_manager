@@ -15,19 +15,19 @@
     		<div class="row">
 				<strong>Prowadzący:</strong>
                 <span ng-repeat="t in project.teachers">
-                	{{t.academic_title + ' ' + t.first_name + ' ' + t.last_name + ' '}}
+                	{{t.academic_title + ' ' + t.first_name + ' ' + t.last_name + '; '}}
                 </span>
     		</div>
             <div class="row">
             	<strong>Wykonawca / zespół:</strong>
                	<span ng-repeat="m in project.members">
-               		{{m.first_name + ' ' + m.last_name }}
+               		{{m.first_name + ' ' + m.last_name + '; ' }}
                	</span>
             </div>
-            <div class="row" ng-show="students.length > 0">
+            <div class="row" ng-show="students.length > 0" style="margin-top: 5px;">
             	<div class="form-group col-lg-4">
             		<div class="col-lg-10">
-            			<input type="text" class="form-control" ng-model="selectedStudent" typeahead="student as student.first_name for student in students | filter:{first_name:$viewValue}">
+            			<input type="text" class="form-control" ng-model="selectedStudent" typeahead="student as student.name for student in students | filter:{name:$viewValue}">
             		</div>
             		<div class="col-lg-2">
             			<button class="btn btn-primary btn-xs" ng-click="addMember(selectedStudent)">Dodaj</button>
