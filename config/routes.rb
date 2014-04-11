@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     resources :categories, only: [:index]
     resources :technologies, only: [:index]
     resources :diploma_projects, only: [:index]
+    resources :subject_projects, only: [:index]
   end
   
   namespace :admin do
