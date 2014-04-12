@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       resources :projects, only: [:index, :create, :show, :update]
       
       namespace :project do
+        resources :divisions, only: [:create]
         resources :chats, only: [:create, :index]
         resources :comments, only: [:create]
       end

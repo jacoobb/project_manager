@@ -1,6 +1,6 @@
 class Project < ActiveRecord::Base
   PROJECT_TYPE = %w(subject first_degree second_degree diploma)
-  APPROVAL_STATUS = %w(expectant approved rejected to_improve finished)
+  APPROVAL_STATUS = %w(expectant approved rejected to_improve finished divided)
 
   belongs_to :subject
   has_many :activity_logs

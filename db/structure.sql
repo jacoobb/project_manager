@@ -262,7 +262,8 @@ CREATE TABLE projects (
     updated_at timestamp without time zone,
     project_type character varying(255),
     subject_id integer,
-    approval_status character varying(255)
+    approval_status character varying(255),
+    father_id integer
 );
 
 
@@ -891,4 +892,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140402093712');
 INSERT INTO schema_migrations (version) VALUES ('20140402093758');
 
 INSERT INTO schema_migrations (version) VALUES ('20140405132724');
+
+INSERT INTO schema_migrations (version) VALUES ('20140412090510');
 
