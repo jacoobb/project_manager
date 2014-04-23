@@ -1,0 +1,68 @@
+<div class="bs-docs-section">
+	<div class="page-header">
+    	<div class="row">
+            <div class="col-lg-12">
+              <h2>Podziel temat projektu</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+       		<div class="form-group">
+				<label class="control-label">Wybierz temat projektu do podziału</label>
+
+		        <select class="form-control" ng-model="projectId">
+		          <option ng-repeat="p in projects" value="{{p.id}}">{{p.name}}</option>
+		        </select>
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			<div class="alert alert-dismissable alert-warning">
+			<button type="button" class="close" data-dismiss="alert">x</button>
+			<h4>Uwaga!</h4>
+			<p>
+				<strong>
+					Tylko projekty nie posiadające wykonawcy mogą zostać podzielone.
+				</strong>
+			</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+        <div class="col-md-6">
+       		<div class="form-group">
+				<label class="control-label">Podziel na</label>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-lg-6">
+		<form class="form-horizontal" ng-submit="divide()">
+			<div ng-repeat="p in newProjects" class="form-group">
+				<label class="col-lg-2 control-label">Temat</label>
+
+			    <div class="col-lg-10">
+			    <input type="text" class="form-control" ng-model="p.name" placeholder="Temat {{$index + 1}}" required>
+			    </div>
+			    
+			    <label class="col-lg-2 control-label">Opis</label>
+			    <div class="col-lg-10">
+			    <textarea class="form-control" ng-model="p.description" rows="5" placeholder="Opis {{$index + 1}}" required></textarea>
+			    </div>
+			</div>
+
+			<div class="form-group">
+		      <div class="col-lg-10">
+		        <button type="submit" class="btn btn-primary">Podziel</button>
+		      </div>
+		    </div>
+		</form>
+
+		</div>
+	</div>
+</div>
+

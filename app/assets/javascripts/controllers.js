@@ -55,10 +55,6 @@ angular.module('app.controllers', [])
 		};
 	}])
 
-	.controller('ProjectsCtrl', ['$scope', '$location', '$http', function ($scope, $location, $http) {
-
-	}])
-
 	.controller('DiplomaThesisNegotiationCtrl', ['$scope', '$location', '$http', '$modal', function ($scope, $location, $http, $modal) {
 
 

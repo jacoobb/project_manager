@@ -7,8 +7,8 @@
         </div>
     </div>
     
-    <div class="row" ng-show="userType == 'student'">
-        <div class="col-md-4 col-sm-6" ng-repeat="p in projects">
+    <div class="row" ng-show="userType == 'student'" ng-repeat="items in projects | partition: 3">
+        <div class="col-md-4 col-sm-6" ng-repeat="p in items">
             <div class="panel panel-default">
                 <div class="panel-heading">{{p.name}}</div>
                 
@@ -36,8 +36,8 @@
         </div>  
     </div>
 
-    <div class="row" ng-show="userType == 'teacher'">
-        <div class="col-md-4 col-sm-6" ng-repeat="p in projects">
+    <div class="row" ng-show="userType == 'teacher'" ng-repeat="items in projects | partition: 3">
+        <div class="col-md-4 col-sm-6" ng-repeat="p in items">
             <div class="panel panel-default">
                 <div class="panel-heading">{{p.name}}</div>
                 
@@ -59,7 +59,8 @@
                     </p>
                     <p>
                         <a class="btn btn-default btn-sm pull-right" ng-href="/project_edit/{{p.id}}" ng-show="p.members.length == 0">Edytuj</a>
-                        <a class="btn btn-default btn-sm pull-right" ng-href="/project_details/{{p.id}}" ng-show="p.members.length > 0">Przejdź</a>
+                        <a class="btn btn-info btn-sm pull-right" ng-href="/project_details/{{p.id}}" ng-show="p.members.length > 0 && p.approval_status != 'expectant'">Przejdź</a>
+                        <a class="btn btn-default btn-sm pull-right" ng-href="/project_negotiation/{{p.id}}" ng-show="p.members.length > 0 && p.approval_status == 'expectant'">Negocjuj</a>
                     </p>
                 </div>
             </div>
@@ -68,5 +69,6 @@
 
     <div ng-show="userType == 'teacher'" class="row">
         <a class="btn btn-primary" href="/projects/add_project">Dodaj temat</a>
+        <a class="btn btn-primary" href="/projects/divide_project">Podziel temat</a>
     </div>
 </div>

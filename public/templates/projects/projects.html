@@ -8,6 +8,54 @@
     </div>
     
     <div class="row">
+        <div class="form-horizontal well bs-component">
+            <fieldset>
+                <legend>Filtry</legend>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="col-lg-2 control-label">Przedmiot</label>
+                      <div class="col-lg-10">
+                      <select class="form-control" ng-model="subjectId">
+                          <option ng-repeat="s in subjects" value="{{s.id}}">{{s.name}}</option>
+                      </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-lg-2 control-label">Wykładowca</label>
+                      <div class="col-lg-10">
+                        <input type="text" class="form-control" ng-model="teacherSearch"/>
+                      </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="form-group">
+                    <label class="col-lg-2 control-label">Kategoria</label>
+                      <div class="col-lg-10">
+                      <select class="form-control" ng-model="categorySearch">
+                          <option value="Brak">---</option>
+                          <option ng-repeat="c in categories" value="{{c.name}}">{{c.name}}</option>
+                      </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-lg-2 control-label">Technologia</label>
+                      <div class="col-lg-10">
+                        <select class="form-control" ng-model="technologySearch">
+                          <option value="Brak">---</option>
+                          <option ng-repeat="t in technologies" value="{{t.name}}">{{t.name}}</option>
+                        </select>
+                      </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    
+    
+
+    <div class="row">
         <div class="col-lg-6">
 
             
