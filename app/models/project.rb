@@ -52,4 +52,9 @@ class Project < ActiveRecord::Base
     members.each {|m| self.students << m}
   end
 
+  def accept
+    approval_status = 'approved'
+    save
+  end
+
 end

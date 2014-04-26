@@ -238,4 +238,26 @@ describe Api::Teacher::ProjectsController do
       end
     end
   end
+
+  describe '#POST accept' do
+    let(:project) { FactoryGirl.create :project } 
+    before do
+      Api::TeacherController.any_instance.stub(:current_teacher).and_return teacher
+      teacher.projects << project
+    end
+
+    it '201' do
+      post :accept, project_id: project.id
+      response.status.should eq 201
+    end
+  end
 end
+
+
+
+
+
+
+
+
+

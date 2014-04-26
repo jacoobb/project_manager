@@ -114,5 +114,13 @@ describe Project do
         project.students.count.should eq 2
       end
     end
+
+    describe 'accept' do
+      let(:project) { FactoryGirl.create :project } 
+      it 'set status approved' do
+        project.accept
+        project.approval_status.should eq 'approved'
+      end
+    end
   end
 end

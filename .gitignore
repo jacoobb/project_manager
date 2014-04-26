@@ -21,3 +21,4 @@ config/settings.yml
 
 spec/vcr.log
 .DS_Store
+.rvmrc

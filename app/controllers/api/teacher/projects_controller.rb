@@ -20,6 +20,7 @@ class Api::Teacher::ProjectsController < Api::TeacherController
     project = current_teacher.projects.find params[:id]
     project.approval_status = 'approved'
     if project.update params_project_proposal[:project]
+      MyLogger.new.project_activity_log project, current_teacher, 'add_comment'
       head 201
     else
       head 400
@@ -27,13 +28,23 @@ class Api::Teacher::ProjectsController < Api::TeacherController
   end
 
   def create
-    project_proposal = Project::ProjectProposalCreator.new(params_project_proposal, current_teacher)
+    project_proposal = ::Project::ProjectProposalCreator.new(params_project_proposal, current_teacher)
     if project_proposal.create_by_teacher
       MyLogger.new.project_activity_log project_proposal.project, current_teacher, 'create_project_proposal'
       message = {id: project_proposal.project.id}
       render json: message.to_json, status: 201
     else
       render json: project_proposal.project.errors.to_json, status: 400
+    end
+  end
+
+  def accept
+    project = current_teacher.projects.find_by id: params[:project_id]
+    if project.accept
+      MyLogger.new.project_activity_log project, current_teacher, 'change_status'
+      head 201
+    else
+      head 400
     end
   end
 

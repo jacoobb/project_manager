@@ -24,7 +24,9 @@ Rails.application.routes.draw do
       resources :activity_logs, only: [:index]
       resources :session, only: [:create, :destroy]
       resources :subjects, only: [:index]
-      resources :projects, only: [:index, :create, :show, :update]
+      resources :projects, only: [:index, :create, :show, :update] do
+        post :accept  
+      end
       
       namespace :project do
         resources :divisions, only: [:create]
