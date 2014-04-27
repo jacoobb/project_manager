@@ -455,6 +455,36 @@ ALTER SEQUENCE students_subjects_id_seq OWNED BY students_subjects.id;
 
 
 --
+-- Name: students_to_dos; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE students_to_dos (
+    id integer NOT NULL,
+    student_id integer,
+    to_do_id integer
+);
+
+
+--
+-- Name: students_to_dos_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE students_to_dos_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: students_to_dos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE students_to_dos_id_seq OWNED BY students_to_dos.id;
+
+
+--
 -- Name: subjects; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -585,6 +615,40 @@ ALTER SEQUENCE technologies_id_seq OWNED BY technologies.id;
 
 
 --
+-- Name: to_dos; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE to_dos (
+    id integer NOT NULL,
+    name character varying(255),
+    done boolean,
+    description text,
+    project_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: to_dos_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE to_dos_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: to_dos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE to_dos_id_seq OWNED BY to_dos.id;
+
+
+--
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -679,6 +743,13 @@ ALTER TABLE ONLY students_subjects ALTER COLUMN id SET DEFAULT nextval('students
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY students_to_dos ALTER COLUMN id SET DEFAULT nextval('students_to_dos_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY subjects ALTER COLUMN id SET DEFAULT nextval('subjects_id_seq'::regclass);
 
 
@@ -701,6 +772,13 @@ ALTER TABLE ONLY teachers ALTER COLUMN id SET DEFAULT nextval('teachers_id_seq':
 --
 
 ALTER TABLE ONLY technologies ALTER COLUMN id SET DEFAULT nextval('technologies_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY to_dos ALTER COLUMN id SET DEFAULT nextval('to_dos_id_seq'::regclass);
 
 
 --
@@ -808,6 +886,14 @@ ALTER TABLE ONLY students_subjects
 
 
 --
+-- Name: students_to_dos_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY students_to_dos
+    ADD CONSTRAINT students_to_dos_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: subjects_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -837,6 +923,14 @@ ALTER TABLE ONLY teachers
 
 ALTER TABLE ONLY technologies
     ADD CONSTRAINT technologies_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: to_dos_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY to_dos
+    ADD CONSTRAINT to_dos_pkey PRIMARY KEY (id);
 
 
 --
@@ -895,4 +989,8 @@ INSERT INTO schema_migrations (version) VALUES ('20140402093758');
 INSERT INTO schema_migrations (version) VALUES ('20140405132724');
 
 INSERT INTO schema_migrations (version) VALUES ('20140412090510');
+
+INSERT INTO schema_migrations (version) VALUES ('20140426165855');
+
+INSERT INTO schema_migrations (version) VALUES ('20140426170627');
 

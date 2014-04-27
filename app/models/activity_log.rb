@@ -1,6 +1,6 @@
 class ActivityLog < ActiveRecord::Base
-  ACTIONS = %w(create_project reserve_project create_project_proposal
-               add_student_to_team change_status add_comment)
+  ACTIONS = %w(create_project reserve_project create_project_proposal to_do_is_dane
+              add_student_to_team change_status add_comment add_to_do_to_project)
 
   belongs_to :student
   belongs_to :teacher

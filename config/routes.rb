@@ -17,6 +17,9 @@ Rails.application.routes.draw do
       namespace :project do
         resources :team_members, only: [:create]
         resources :chats, only: [:create, :index]
+        resources :to_dos, only: [:create, :index] do
+          post :done
+        end
       end
     end 
 
