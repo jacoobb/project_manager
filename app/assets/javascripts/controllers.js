@@ -2,56 +2,35 @@
 
 angular.module('app.controllers', [])
 
-	.controller('LoginCtrl', ['$scope', '$location', '$http', 'SessionService', function ($scope, $location, $http, SessionService) {
+	.controller('LoginCtrl', ['$scope', '$location', 'AuthService', 'SessionService', function ($scope, $location, AuthService, SessionService) {
 		$scope.$root.title = 'Logowanie';
 
 		$scope.userType = 'student';
 
 		$scope.message = '';
 
-		$scope.changeClass = function(userType) {
+		$scope.setUserType = function(userType) {
 			$scope.userType = userType;
 		};
 
 		$scope.login = function(userName, password) {
 			if($scope.userType == 'student') {
-				$http.post('/api/student/session', { student: { matricula_number: "88457", password: "12qwaszx" } })
-	      			.success(function (data, status, headers, config) {
-	        			SessionService.isAuth = true;
-	        			SessionService.userName = 'Maciej';
-						SessionService.userType = 'student';
-
-	        			$location.path('/');
-	      			})
-	      			.error(function (data, status, headers, config) {
-						$scope.message = 'Nieprawidłowy numer albumu lub hasło';
-      			});
+				userName = "88457";
+	      		password = "12qwaszx";
+				AuthService.login(userName, password, $scope.userType).then(function() {
+					$location.path('/');
+				}, function () {
+					$scope.message = 'Nieprawidłowy numer albumu lub hasło';
+				});
 	      	} else {
-	      		$http.post('/api/teacher/session', { teacher: { email: "zabawa@gmail.com", password: "12qwaszx" } })
-	      			.success(function (data, status, headers, config) {
-	        			SessionService.isAuth = true;
-	        			SessionService.userName = 'Maciej';
-	        			SessionService.userType = 'teacher';
-
-	        			$location.path('/');
-	      			})
-	      			.error(function (data, status, headers, config) {
-						$scope.message = 'Nieprawidłowy email lub hasło';
-      			});
+	      		userName = "zabawa@gmail.com";
+	      		password = "12qwaszx";
+	      		AuthService.login(userName, password, $scope.userType).then(function() {
+					$location.path('/');
+				}, function () {
+					$scope.message = 'Nieprawidłowy email lub hasło';
+				});
 	      	}
-		};
-
-		$scope.logout = function() {
-			$http.delete('/api/student/session:88456')
-      			.success(function (data, status, headers, config) {
-      				SessionService.isAuth = false;
-        			SessionService.userName = '';
-
-        			$location.path('/login');
-      			})
-      			.error(function (data, status, headers, config) {
-					
-      			});
 		};
 	}])
 

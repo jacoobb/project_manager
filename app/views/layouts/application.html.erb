@@ -2,10 +2,8 @@
 <html ng-app="app">
 <head>
   <title ng-bind="'Project Manager - ' + title">Project Manager</title>
-  <script src="http://code.angularjs.org/1.2.5/angular.min.js"></script>
-  <script src="http://code.angularjs.org/1.2.5/angular-route.min.js"></script>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -45,7 +43,7 @@
 	    </ul>
 
 	    <ul class="nav navbar-nav navbar-right">
-	      <li><a href="/login">Wyloguj</a></li>
+	      <li><a href="/logout">Wyloguj</a></li>
 	    </ul>
 	  </div>
 	</div>

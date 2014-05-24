@@ -16,6 +16,17 @@ angular.module('app', ['ngRoute', 'app.filters', 'app.services', 'app.directives
 				controller: "LoginCtrl",
 				authenticate: false
 			})
+			.when('/logout', {
+				resolve: {
+					logout: function($location, AuthService) {
+						AuthService.logout().then(function() {
+							$location.path('/login');
+						}, function () {
+							$location.path('/login');
+						});
+					}
+				}
+			})
 			.when('/projects', {
 				templateUrl: '../templates/projects/projects.html',
 				controller: "ProjectsCtrl",

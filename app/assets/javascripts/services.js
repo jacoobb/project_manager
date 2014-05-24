@@ -2,14 +2,60 @@
 
 angular.module('app.services', [])
 
-	.factory('SessionService', function() {
-		var session = {
-			isAuth: false,
-			userName: '',
-			userType: 'teacher'
+	.service('SessionService', function() {
+		this.create = function(id, userType, userName) {
+			this.id = id;
+			this.userType = userType;
+			this.userName = userName;
+			this.isAuth = true;
+		};
+		this.clear = function() {
+			this.id = null;
+			this.userType = null;
+			this.userName = null;
+			this.isAuth = false;
 		};
 
-		return session;
+		return this;
+	})
+
+	.factory('AuthService', function($http, SessionService) {
+		return {
+			login: function (userName, password, userType) {
+				if(userType == 'student') {
+					return $http
+					.post('/api/student/session', { student: { matricula_number: userName, password: password } })
+					.then(function(result) {
+						var user = result.data;
+
+						SessionService.create(user.data.matricula_number, 'student', 'Maciej Ogrodniczak');
+					});
+				} else {
+					return $http
+					.post('/api/teacher/session', { teacher: { email: userName, password: password } })
+					.then(function(result) {
+						var user = result.data;
+
+						SessionService.create(user.id, 'teacher', user.first_name + ' ' + user.last_name);
+					});
+				}
+			},
+			logout: function() {
+				if(SessionService.userType == 'student') {
+					return $http
+					.delete('/api/student/session/:' + SessionService.id)
+					.then(function(result) {
+						SessionService.clear();
+					});
+				} else {
+					return $http
+					.delete('/api/teacher/session/:' + SessionService.id)
+					.then(function(result) {
+						SessionService.clear();
+					});
+				}
+			}
+		}
 	})
 
 	.service('TextService', function() {

@@ -42,7 +42,7 @@
   line-height: 30px;
   text-decoration: none;
 }
-.userType a:hover,
+
 .userType .active a {
   background-color: #f5f5f5;
 }
