@@ -12,7 +12,7 @@ describe Api::Student::SessionController do
 
     it 'return matricula_number' do
       post :create, student: { matricula_number: student.matricula_number, password: '12qwaszx' }
-      JSON.parse(response.body)["matricula_number"].should eq student.matricula_number
+      JSON.parse(response.body)["student_id"].should eq student.id
     end
 
     it 'authenticate error' do

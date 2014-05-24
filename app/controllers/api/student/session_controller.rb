@@ -5,7 +5,7 @@ class Api::Student::SessionController < Api::StudentController
     student = ::Student.authenticate params_student[:matricula_number], params_student[:password]
     if student
       session[:student_id] = student.id
-      render json: {matricula_number: student.matricula_number}.to_json, status: 201
+      render json: {student_id: student.id, first_name: student.first_name, last_name: student.last_name}.to_json, status: 201
     else
       head 401
     end
