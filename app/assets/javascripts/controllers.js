@@ -15,8 +15,8 @@ angular.module('app.controllers', [])
 
 		$scope.login = function(userName, password) {
 			if($scope.userType == 'student') {
-				userName = "88457";
-	      		password = "12qwaszx";
+				//userName = "88457";
+	      		//password = "12qwaszx";
 				AuthService.login(userName, password, $scope.userType).then(function() {
 					$location.path('/');
 				}, function () {

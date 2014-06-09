@@ -13,7 +13,7 @@
 				<div class="form-group">
 					<label class="col-lg-2 control-label">Prowadzący</label>
 			      	<div class="col-lg-10">
-				        <select class="form-control" ng-model="teacherId" ng-change="getSubjects()">
+				        <select id="teacher" class="form-control" ng-model="teacherId" ng-change="getSubjects()">
 				          <option ng-repeat="t in teachers" value="{{t.id}}">{{t.academic_title + ' ' + t.first_name + ' ' + t.last_name}}</option>
 				        </select>
 					</div>
@@ -22,7 +22,7 @@
 				<div class="form-group">
 					<label class="col-lg-2 control-label">Przedmiot</label>
 			      	<div class="col-lg-10">
-				        <select class="form-control" ng-model="subjectId">
+				        <select id="subject" class="form-control" ng-model="subjectId">
 				          <option ng-repeat="s in subjects" value="{{s.id}}">{{s.name + ' - ' + getSubjectTypeText(s.subject_type)}}</option>
 				        </select>
 					</div>
