@@ -23,8 +23,8 @@ angular.module('app.controllers', [])
 					$scope.message = 'Nieprawidłowy numer albumu lub hasło';
 				});
 	      	} else {
-	      		userName = "zabawa@gmail.com";
-	      		password = "12qwaszx";
+	      		//userName = "zabawa@gmail.com";
+	      		//password = "12qwaszx";
 	      		AuthService.login(userName, password, $scope.userType).then(function() {
 					$location.path('/');
 				}, function () {

@@ -1,32 +1,39 @@
 describe('LoginCtrl test', function() {
-	beforeEach(module("app"));
+	beforeEach(module('app'));
 
-	var $scope, $rootScope, $httpBackend, $timeout, createController;
+	var scope;
 
-	beforeEach(inject(function($injector) {
-		$timeout = $injector.get('$timeout');
-		$httpBackend = $injector.get('$httpBackend');
-		$rootScope = $injector.get('$rootScope');
-		$scope = $rootScope.$new();
+	beforeEach(inject(function($rootScope, $controller) {
+		scope = $rootScope.$new();
 
-		var $controller = $injector.get('$controller');
-
-		createController = function() {
-			return $controller('LoginCtrl', {
-				'$scope': $scope
-			});
-		};
+		$controller('LoginCtrl', { $scope: scope });
 	}));
 
 	it('should have a method to set user type', function() {
-		var loginCtrl = createController();
+		scope.setUserType('teacher');
 
-		$scope.setUserType('teacher');
-
-		expect($scope.userType).toBe('teacher');
+		expect(scope.userType).toBe('teacher');
 	});
 
-	it('should get success login', function() {
-		$httpBackend.expect('POST', )
-	});
+	it('should get failed login', inject(function(AuthService, SessionService, $httpBackend) {
+		$httpBackend.expect('POST', '/api/teacher/session')
+			.respond(401);
+
+		AuthService.login('qwerty@wp.pl', '12345', 'teacher').then(function () {
+			expect(SessionService.isAuth).toBeFalsy();
+		});
+
+		$httpBackend.flush();
+	}));
+
+	it('should get success login', inject(function(AuthService, SessionService, $httpBackend) {
+		$httpBackend.expect('POST', '/api/student/session')
+			.respond(201, '{"student_id":2,"first_name":"Jakub","last_name":"Mikrut"}');
+
+		AuthService.login('88457', '12qwaszx', 'student').then(function () {
+			expect(SessionService.isAuth).toBeTruthy();
+		});
+
+		$httpBackend.flush();
+	}));
 })

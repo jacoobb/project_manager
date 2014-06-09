@@ -15,17 +15,9 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-	'../angular/angular.min.js',
-	'../angular/angular-route.min.js',
-	'../angular/angular-mocks.js',
-	'../angular-ui/ui-bootstrap-0.10.0.js',
-	'../app.js',
-	'../services.js',
-	'../directives.js',
-	'../filters.js',
-	'../controllers.js',
-	'filters.test.js',
-	'loginCtrl.test.js'
+	ANGULAR_SCENARIO,
+	ANGULAR_SCENARIO_ADAPTER,
+	'loginE2E.test.js'      
     ],
 
 
@@ -51,7 +43,7 @@ module.exports = function(config) {
     // web server port
     port: 9876,
 
-
+    runnerPort =
     // enable / disable colors in the output (reporters and logs)
     colors: true,
 

@@ -28,7 +28,7 @@ angular.module('app.services', [])
 					.then(function(result) {
 						var user = result.data;
 
-						SessionService.create(user.data.matricula_number, 'student', 'Maciej Ogrodniczak');
+						SessionService.create(user.student_id, 'student', user.first_name + ' ' + user.last_name);
 					});
 				} else {
 					return $http
